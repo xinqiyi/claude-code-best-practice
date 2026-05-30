@@ -1,6 +1,6 @@
 ---
 name: time-skill
-description: 显示巴基斯坦标准时间（PKT，UTC+5）的当前时间。当用户询问当前时间、巴基斯坦时间或PKT时使用。
+description: 显示巴基斯坦标准时间（PKT，UTC+5）的当前时间。当用户询问当前时间、巴基斯坦时间或 PKT 时使用。
 user-invocable: true
 ---
 

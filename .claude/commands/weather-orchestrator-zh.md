@@ -1,5 +1,5 @@
 ---
-description: 获取迪拜天气并创建SVG天气卡片
+description: 获取迪拜天气并创建 SVG 天气卡片
 model: haiku
 allowed-tools:
   - AskUserQuestion
@@ -9,7 +9,7 @@ allowed-tools:
 
 # Weather Orchestrator 命令
 
-获取阿联酋迪拜的当前温度并创建可视化的SVG天气卡片。
+获取阿联酋迪拜的当前温度并创建可视化的 SVG 天气卡片。
 
 ## 执行契约（不可协商）
 
@@ -40,7 +40,7 @@ allowed-tools:
 
 **故障封闭防护**：如果 agent 没有返回数值温度值和单位，不要继续执行步骤 3。向用户报告失败并停止。
 
-### 步骤 3：创建SVG天气卡片
+### 步骤 3：创建 SVG 天气卡片
 
 使用 Skill 工具调用 weather-svg-creator skill：
 

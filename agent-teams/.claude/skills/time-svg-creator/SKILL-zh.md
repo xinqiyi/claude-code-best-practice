@@ -1,22 +1,22 @@
 ---
 name: time-svg-creator
-description: 创建显示迪拜当前时间的SVG时间卡片。将SVG写入 agent-teams/output/dubai-time.svg 并更新 agent-teams/output/output.md。
+description: 创建显示迪拜当前时间的 SVG 时间卡片。将 SVG 写入 agent-teams/output/dubai-time.svg 并更新 agent-teams/output/output.md。
 allowed-tools: Write, Read
 ---
 
 # Time SVG Creator 技能
 
-创建迪拜的视觉SVG时间卡片并写入输出文件。
+创建迪拜的视觉 SVG 时间卡片并写入输出文件。
 
 ## 任务
 
-你将接收来自调用上下文的三个字段：`time`、`timezone` 和 `formatted`。创建一个SVG时间卡片，并同时写入SVG文件和markdown摘要。
+你将接收来自调用上下文的三个字段：`time`、`timezone` 和 `formatted`。创建一个 SVG 时间卡片，并同时写入 SVG 文件和 markdown 摘要。
 
 ## 说明
 
-1. **创建 SVG** — 使用 [reference.md](reference.md) 中的SVG模板，将占位符替换为实际值
+1. **创建 SVG** — 使用 [reference.md](reference.md) 中的 SVG 模板，将占位符替换为实际值
 2. **写入 SVG 文件** — 写入到 `agent-teams/output/dubai-time.svg`
-3. **写入摘要** — 使用 [reference.md](reference.md) 中的markdown模板写入到 `agent-teams/output/output.md`
+3. **写入摘要** — 使用 [reference.md](reference.md) 中的 markdown 模板写入到 `agent-teams/output/output.md`
 
 ## 规则
 
@@ -26,5 +26,5 @@ allowed-tools: Write, Read
 
 ## 其他资源
 
-- 有关SVG模板、输出模板和设计规范，请参阅 [reference.md](reference.md)
+- 有关 SVG 模板、输出模板和设计规范，请参阅 [reference.md](reference.md)
 - 有关输入/输出示例，请参阅 [examples.md](examples.md)

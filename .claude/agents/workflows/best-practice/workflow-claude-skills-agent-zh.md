@@ -1,6 +1,6 @@
 ---
 name: workflow-claude-skills-agent
-description: 研究型agent，负责获取Claude Code文档、读取本地skills报告并分析差异
+description: 研究型 agent，负责获取 Claude Code 文档、读取本地 skills 报告并分析差异
 model: opus
 color: magenta
 allowedTools:
