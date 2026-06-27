@@ -1,13 +1,13 @@
 # 天气结果
 
-## 温度
+## Temperature
 89.3°F
 
-## 位置
-迪拜，阿联酋
+## Location
+Dubai, UAE
 
-## 单位
-华氏度
+## Unit
+Fahrenheit
 
-## SVG 卡片
-![天气卡片](weather.svg)
+## SVG Card
+![Weather Card](weather.svg)
