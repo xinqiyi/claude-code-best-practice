@@ -7,76 +7,76 @@
 </tr>
 </table>
 
-## 执行摘要
+## 概述
 
-经过广泛研究，我分析了您截图中的两个工具以及第三个主要竞争者。以下是全面的对比分析，帮助您为自动化测试工作选择最佳方案。
+基于广泛的研究，我分析了来自截图中的两个工具以及第三个主要竞争者。以下是我的全面分析，帮助你为自动化测试工作选择最佳方案。
 
 ---
 
 ## 1. 三大竞争者
 
-### **A. Chrome DevTools MCP**（您的截图 #1）
-- **来源：** 谷歌 Chrome 官方团队
-- **发布时间：** 2025 年 9 月公开预览版
+### **A. Chrome DevTools MCP**（你的截图 #1）
+- **来源：** Google Chrome 官方团队
+- **发布：** 2025 年 9 月公开预览
 - **架构：** 基于 Chrome DevTools Protocol (CDP) + Puppeteer
-- **Token 用量：** ~19.0k tokens（占上下文的 9.5%）
-- **工具数量：** 6 大类别共 26 个专业工具
+- **Token 用量：** ~19.0k token（context 的 9.5%）
+- **工具：** 26 个专用工具，分为 6 个类别
 
-### **B. Claude in Chrome**（您的截图 #2）
+### **B. Claude in Chrome**（你的截图 #2）
 - **来源：** Anthropic 官方扩展
-- **发布时间：** Beta 版，逐步向所有付费计划（Pro、Max、Team、Enterprise）开放
-- **架构：** 具备 computer-use 能力的浏览器扩展
-- **Token 用量：** ~15.4k tokens（占上下文的 7.7%）
-- **工具数量：** 16 个工具，包含 computer-use 能力
+- **发布：** Beta 版，向所有付费计划（Pro、Max、Team、Enterprise）推出
+- **架构：** 带有 computer-use 能力的浏览器扩展
+- **Token 用量：** ~15.4k token（context 的 7.7%）
+- **工具：** 16 个工具，包括 computer use 能力
 
 ### **C. Playwright MCP**（强力替代方案）
-- **来源：** 微软（官方 + 社区实现）
-- **架构：** 基于无障碍树的自动化
-- **Token 用量：** ~13.7k tokens（占上下文的 6.8%）
-- **工具数量：** 21 个工具
+- **来源：** Microsoft（官方 + 社区实现）
+- **架构：** 基于 accessibility tree 的自动化
+- **Token 用量：** ~13.7k token（context 的 6.8%）
+- **工具：** 21 个工具
 
 ---
 
 ## 2. 详细功能对比
 
-| 功能特性 | Chrome DevTools MCP | Claude in Chrome | Playwright MCP |
+| Feature | Chrome DevTools MCP | Claude in Chrome | Playwright MCP |
 |---------|---------------------|------------------|----------------|
-| **主要用途** | 调试与性能分析 | 通用浏览器自动化 | UI 测试与 E2E |
-| **浏览器支持** | 仅 Chrome | 仅 Chrome | Chromium、Firefox、WebKit |
-| **Token 效率** | 19.0k (9.5%) | 15.4k (7.7%) | 13.7k (6.8%) |
-| **元素选择** | CSS/XPath 选择器 | 可视化 + DOM | 无障碍树（语义化） |
-| **性能追踪** | ✅ 优秀 | ❌ 不支持 | ⚠️ 有限 |
-| **网络审查** | ✅ 深度分析 | ⚠️ 基础 | ⚠️ 基础 |
-| **控制台日志** | ✅ 完整访问 | ✅ 完整访问 | ⚠️ 有限 |
-| **跨浏览器** | ❌ 不支持 | ❌ 不支持 | ✅ 支持 |
-| **CI/CD 集成** | ✅ 优秀 | ❌ 较差（需要登录） | ✅ 优秀 |
-| **无头模式** | ✅ 支持 | ❌ 不支持 | ✅ 支持 |
-| **身份认证** | 需要配置 | 使用您的会话 | 需要配置 |
-| **定时任务** | ❌ 不支持 | ✅ 支持 | ❌ 不支持 |
-| **费用** | 免费 | 需要付费计划 | 免费 |
-| **本地配置** | 需要 Node.js | 浏览器扩展 | 需要 Node.js |
+| **Primary Purpose** | 调试和性能 | 通用浏览器自动化 | UI 测试和 E2E |
+| **Browser Support** | 仅 Chrome | 仅 Chrome | Chromium、Firefox、WebKit |
+| **Token Efficiency** | 19.0k (9.5%) | 15.4k (7.7%) | 13.7k (6.8%) |
+| **Element Selection** | CSS/XPath 选择器 | 视觉 + DOM | Accessibility tree（语义化） |
+| **Performance Traces** | ✅ 优秀 | ❌ 不支持 | ⚠️ 有限 |
+| **Network Inspection** | ✅ 深入分析 | ⚠️ 基础 | ⚠️ 基础 |
+| **Console Logs** | ✅ 完整访问 | ✅ 完整访问 | ⚠️ 有限 |
+| **Cross-browser** | ❌ 不支持 | ❌ 不支持 | ✅ 支持 |
+| **CI/CD Integration** | ✅ 优秀 | ❌ 差（需要登录） | ✅ 优秀 |
+| **Headless Mode** | ✅ 支持 | ❌ 不支持 | ✅ 支持 |
+| **Authentication** | 需要设置 | 使用你的 session | 需要设置 |
+| **Scheduled Tasks** | ❌ 不支持 | ✅ 支持 | ❌ 不支持 |
+| **Cost** | 免费 | 需要付费计划 | 免费 |
+| **Local Setup** | 需要 Node.js | 浏览器扩展 | 需要 Node.js |
 
 ---
 
-## 3. 工具分类
+## 3. 工具细分
 
 ### Chrome DevTools MCP（26 个工具）
 
 ```
-输入自动化 (8 个)：     click、drag、fill、fill_form、handle_dialog、
+INPUT AUTOMATION (8):     click、drag、fill、fill_form、handle_dialog、
                           hover、press_key、upload_file
 
-导航 (6 个)：           close_page、list_pages、navigate_page、
+NAVIGATION (6):           close_page、list_pages、navigate_page、
                           new_page、select_page、wait_for
 
-模拟 (2 个)：           emulate、resize_page
+EMULATION (2):            emulate、resize_page
 
-性能 (3 个)：           performance_analyze_insight、
+PERFORMANCE (3):          performance_analyze_insight、
                           performance_start_trace、performance_stop_trace
 
-网络 (2 个)：           get_network_request、list_network_requests
+NETWORK (2):              get_network_request、list_network_requests
 
-调试 (5 个)：           evaluate_script、get_console_message、
+DEBUGGING (5):            evaluate_script、get_console_message、
                           list_console_messages、take_screenshot、
                           take_snapshot
 ```
@@ -84,37 +84,37 @@
 ### Claude in Chrome（16 个工具）
 
 ```
-浏览器控制：          navigate、read_page、find、computer
+BROWSER CONTROL:          navigate、read_page、find、computer
                           （click、type、scroll）
 
-表单交互：            form_input、javascript_tool
+FORM INTERACTION:         form_input、javascript_tool
 
-媒体：                upload_image、get_page_text、gif_creator
+MEDIA:                    upload_image、get_page_text、gif_creator
 
-标签页管理：          tabs_context_mcp、tabs_create_mcp
+TAB MANAGEMENT:           tabs_context_mcp、tabs_create_mcp
 
-开发工具：            read_console_messages、read_network_requests
+DEVELOPMENT:              read_console_messages、read_network_requests
 
-实用工具：            shortcuts_list、shortcuts_execute、
+UTILITIES:                shortcuts_list、shortcuts_execute、
                           resize_window、update_plan
 ```
 
 ### Playwright MCP（21 个工具）
 
 ```
-导航：                navigate、goBack、goForward、reload
+NAVIGATION:               navigate、goBack、goForward、reload
 
-交互：                click、fill、select、hover、press、
+INTERACTION:              click、fill、select、hover、press、
                           drag、uploadFile
 
-元素查询：            getElement、getElements、waitForSelector
+ELEMENT QUERIES:          getElement、getElements、waitForSelector
 
-断言：                assertVisible、assertText、assertTitle
+ASSERTIONS:               assertVisible、assertText、assertTitle
 
-页面状态：            screenshot、getAccessibilityTree、
+PAGE STATE:               screenshot、getAccessibilityTree、
                           evaluateScript
 
-浏览器管理：          newPage、closePage
+BROWSER MGMT:             newPage、closePage
 ```
 
 ---
@@ -124,42 +124,42 @@
 ### **Chrome DevTools MCP 最适合：**
 
 ✅ **性能测试**
-- 记录包含 Core Web Vitals 的性能追踪
+- 记录带有 Core Web Vitals 的 performance trace
 - 识别渲染瓶颈和布局偏移
-- 内存泄漏检测和 CPU 分析
+- 内存泄漏检测和 CPU profiling
 
-✅ **深度调试**
-- 网络请求审查（请求头、负载、时间线）
-- 控制台错误分析和堆栈追踪
+✅ **深入调试**
+- 网络请求检查（headers、payloads、timing）
+- 控制台错误分析和 stack trace
 - 实时 DOM 检查
 
-✅ **CI/CD 管道**
-- 支持无头执行
-- 稳定、基于脚本的自动化
-- 无需身份认证状态依赖
+✅ **CI/CD Pipeline**
+- 支持 headless 执行
+- 稳定的、基于脚本的自动化
+- 无认证状态依赖
 
-**理想工作流：** "查找页面变慢的原因"或"调试此 API 调用"
+**理想工作流：** "找出这个页面为什么慢"或"调试这个 API 调用"
 
 ---
 
 ### **Claude in Chrome 最适合：**
 
 ✅ **手动测试辅助**
-- 在登录状态下进行测试
-- 带视觉上下文的探索性测试
+- 在登录账户状态下测试
+- 带有视觉 context 的探索性测试
 - 录制可重放的工作流
 
 ✅ **快速验证**
-- 设计验证（将 Figma 与输出对比）
-- 新功能抽查
-- 开发期间读取控制台错误
+- 设计验证（对比 Figma 与实际输出）
+- 抽查新功能
+- 在开发过程中读取控制台错误
 
-✅ **重复性浏览器任务**
+✅ **周期性浏览器任务**
 - 定时自动检查
-- 多标签页工作流管理
-- 从录制的操作中学习
+- 多 tab 工作流管理
+- 从你录制的操作中学习
 
-**理想工作流：** "检查我的改动是否看起来正常"或"用我的登录状态测试这个表单"
+**理想工作流：** "检查我的更改是否看起来正确"或"用我的登录测试这个表单"
 
 ---
 
@@ -167,59 +167,59 @@
 
 ✅ **E2E 测试自动化**
 - 跨浏览器测试（Chrome、Firefox、Safari）
-- 生成可复用的测试脚本
-- 页面对象模型生成
+- 生成可重用的测试脚本
+- Page Object Model 生成
 
 ✅ **可靠的 UI 测试**
-- 无障碍树 = 不会出现不稳定的选择器
+- Accessibility tree = 没有脆弱的 selector
 - 确定性交互
-- 不易因 UI 变更而中断
+- 更不容易因 UI 更改而崩溃
 
 ✅ **CI/CD 集成**
-- 管道的无头模式
+- Pipeline 的 headless 模式
 - 从自然语言生成 Playwright 测试文件
 - 与测试管理工具集成
 
-**理想工作流：** "为此用户流程编写 E2E 测试"或"跨浏览器测试此功能"
+**理想工作流：** "为这个用户流程编写 E2E 测试"或"跨浏览器测试这个功能"
 
 ---
 
 ## 5. Token 效率分析
 
-| 工具 | Token 用量 | 上下文占比 | 效率评级 |
+| Tool | Token Usage | % of Context | Efficiency Rating |
 |------|-------------|--------------|-------------------|
 | Playwright MCP | ~13.7k | 6.8% | ⭐⭐⭐⭐⭐ 最佳 |
 | Claude in Chrome | ~15.4k | 7.7% | ⭐⭐⭐⭐ 良好 |
 | Chrome DevTools MCP | ~19.0k | 9.5% | ⭐⭐⭐ 可接受 |
 
-**影响：** 在 200k token 上下文中：
-- Playwright 剩余 186.3k tokens 供您使用
-- Claude in Chrome 剩余 184.6k tokens
-- Chrome DevTools 剩余 181k tokens
+**影响：** 在 200k token context 下：
+- Playwright 为你的工作留下 186.3k token
+- Claude in Chrome 留下 184.6k token
+- Chrome DevTools 留下 181k token
 
-Playwright 与 Chrome DevTools 之间约 5.3k token 的差异，在处理大量代码上下文的复杂会话中可能产生影响。
+Playwright 和 Chrome DevTools 之间约 5.3k token 的差异，在具有大量代码 context 的复杂 session 中可能很重要。
 
 ---
 
 ## 6. 安全考量
 
 ### Chrome DevTools MCP
-- ✅ 默认使用隔离浏览器配置文件
+- ✅ 默认隔离的浏览器 profile
 - ✅ 无云依赖
-- ✅ 完全本地控制
-- ⚠️ 远程调试端口安全（请使用隔离配置文件）
+- ✅ 完全的本地控制
+- ⚠️ 远程调试端口安全（使用隔离的 profile）
 
 ### Claude in Chrome
-- ⚠️ **无防护措施时攻击成功率为 23.6%**（启用防御后降至 11.2%）
-- ⚠️ 使用您的实际浏览器会话（存在 cookie 暴露风险）
-- ⚠️ 被限制访问金融/成人/盗版网站
-- ⚠️ 仍处于 Beta 阶段，存在已知漏洞
+- ⚠️ **23.6% 攻击成功率**——在没有防护措施的情况下（有防护措施时降至 11.2%）
+- ⚠️ 使用你实际的浏览器 session（cookie 暴露风险）
+- ⚠️ 禁止访问金融/成人/盗版网站
+- ⚠️ 仍处于 beta 阶段，存在已知漏洞
 
 ### Playwright MCP
-- ✅ 隔离的浏览器上下文
+- ✅ 隔离的浏览器 context
 - ✅ 无云依赖
-- ✅ 成熟的安全模型（微软支持）
-- ✅ 可安全处理身份认证
+- ✅ 成熟的安全模型（Microsoft 支持）
+- ✅ 可以安全地处理认证
 
 ---
 
@@ -234,7 +234,7 @@ claude mcp add chrome-devtools npx chrome-devtools-mcp@latest
 ### Claude in Chrome
 
 ```
-从 Chrome 网上应用店安装（需要 Pro/Max/Team/Enterprise 计划）
+从 Chrome Web Store 安装（需要 Pro/Max/Team/Enterprise 计划）
 ```
 
 ### Playwright MCP（推荐）
@@ -243,51 +243,51 @@ claude mcp add chrome-devtools npx chrome-devtools-mcp@latest
 # 首先，安装浏览器
 npx playwright install
 
-# 然后添加到 Claude Code（user 作用域 = 所有项目）
+# 然后添加到 Claude Code（user scope = 所有项目）
 claude mcp add playwright -s user -- npx @playwright/mcp@latest
 ```
 
 ---
 
-## 8. 推荐方案
+## 8. 推荐
 
-### **针对您的自动化测试工作流：**
+### **为你的自动化测试工作流：**
 
-#### 🥇 **首选工具：Playwright MCP**
+#### 🥇 **主要工具：Playwright MCP**
 
 **用于：** 日常 E2E 测试、跨浏览器验证、生成测试脚本
 
-**理由：**
-- 最低的 token 用量（更多上下文用于您的代码）
+**原因：**
+- 最低的 token 用量（为你的代码留下更多 context）
 - 跨浏览器支持（Chrome、Firefox、Safari）
-- 无障碍树方法 = 更可靠的选择器
+- Accessibility tree 方法 = 更可靠的 selector
 - 优秀的 CI/CD 集成
-- 可生成实际的 Playwright 测试文件
+- 可以生成实际的 Playwright 测试文件
 - 免费，无需订阅
 
 #### 🥈 **辅助工具：Chrome DevTools MCP**
 
 **用于：** 性能调试、网络分析、Core Web Vitals
 
-**理由：**
-- 在性能追踪和调试方面无可匹敌
-- 深度网络请求审查
-- 谷歌官方工具，具备长期支持
-- 当需要回答"为什么这么慢？"时必不可少
+**原因：**
+- 在 performance trace 和调试方面无与伦比
+- 深入网络请求检查
+- Google 官方工具，长期支持
+- 当你需要回答"为什么这么慢？"时必不可少
 
-#### 🥉 **场景工具：Claude in Chrome**
+#### 🥉 **特定场景：Claude in Chrome**
 
 **用于：** 登录状态下的快速手动验证、探索性测试、设计验证
 
-**理由：**
-- 适合开发期间的快速视觉检查
-- 可读取您的登录状态
-- 对"这样看起来对吗？"类型的验证很有用
-- CI/CD 或严肃测试自动化场合请跳过
+**原因：**
+- 适合开发过程中的快速视觉检查
+- 可以读取你的登录状态
+- 适合"这个看起来对吗？"的验证
+- 跳过 CI/CD 或严肃的测试自动化
 
 ---
 
-## 9. 推荐配置
+## 9. 推荐设置
 
 ```bash
 # 同时安装 Playwright 和 Chrome DevTools MCP
@@ -299,18 +299,18 @@ claude mcp add chrome-devtools -s user -- npx chrome-devtools-mcp@latest
 ### 建议工作流
 
 ```
-1. 开发      → Claude Code（终端）
-2. 测试      → Playwright MCP（E2E、跨浏览器）
-3. 调试      → Chrome DevTools MCP（性能、网络）
-4. 验证      → Claude in Chrome（快速视觉检查）
-5. CI/CD     → Playwright MCP（无头、自动化）
+1. DEVELOP      → Claude Code（终端）
+2. TEST         → Playwright MCP（E2E、跨浏览器）
+3. DEBUG        → Chrome DevTools MCP（性能、网络）
+4. VERIFY       → Claude in Chrome（快速视觉检查）
+5. CI/CD        → Playwright MCP（headless、自动化）
 ```
 
 ---
 
 ## 10. 最终结论
 
-| 如果您需要... | 请使用 |
+| 如果你需要…… | 使用这个 |
 |----------------|----------|
 | 跨浏览器 E2E 测试 | **Playwright MCP** |
 | 性能分析 | **Chrome DevTools MCP** |
@@ -319,16 +319,16 @@ claude mcp add chrome-devtools -s user -- npx chrome-devtools-mcp@latest
 | CI/CD 自动化 | **Playwright MCP** |
 | 测试脚本生成 | **Playwright MCP** |
 | 最低 token 用量 | **Playwright MCP** |
-| 登录状态测试 | **Claude in Chrome** |
+| 登录 session 测试 | **Claude in Chrome** |
 | 控制台日志调试 | **Chrome DevTools MCP** |
 
-### **TL;DR 推荐：**
+### **总结建议：**
 
-**同时安装 Playwright MCP 和 Chrome DevTools MCP。** 将 Playwright 作为主要测试工具（token 效率更高、跨浏览器、更适合 E2E）。在需要进行深度性能分析或网络调试时使用 Chrome DevTools。仅在需要登录状态进行快速手动验证时使用 Claude in Chrome。
+**同时安装 Playwright MCP 和 Chrome DevTools MCP。** 使用 Playwright 作为主要测试工具（它更 token 高效、跨浏览器、更适合 E2E）。在需要深入性能分析或网络调试时使用 Chrome DevTools。仅在需要登录 session 进行快速手动验证时使用 Claude in Chrome。
 
 ---
 
-## 来源
+## Sources
 
 - [Chrome DevTools MCP - GitHub](https://github.com/ChromeDevTools/chrome-devtools-mcp)
 - [Anthropic - Piloting Claude in Chrome](https://claude.com/blog/claude-for-chrome)

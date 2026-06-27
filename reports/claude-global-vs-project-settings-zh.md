@@ -1,202 +1,202 @@
-# Claude Code: 全局与项目级功能对比
+# Claude Code: Global 与 Project-Level 功能
 
-全局专属（`~/.claude/`）与同时拥有全局和项目级（`.claude/`）配置的 Claude Code 功能的全面对比。
+全面对比哪些 Claude Code 功能是仅 global（`~/.claude/`）的，哪些在 global 和 project-level（`.claude/`）都有对等实现。
 
 <table width="100%">
 <tr>
-<td><a href="../">← 返回 Claude Code 最佳实践</a></td>
+<td><a href="../">← 返回 Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
-## 目录
+## Table of Contents
 
-1. [概述](#overview)
-2. [全局专属功能](#global-only-features)
-3. [双作用域功能](#dual-scope-features)
-4. [设置优先级](#settings-precedence)
-5. [目录结构对比](#directory-structure-comparison)
-6. [任务系统](#tasks-system)
-7. [Agent 团队](#agent-teams)
-8. [设计原则](#design-principles)
-9. [来源](#sources)
-
----
-
-## 概述
-
-Claude Code 使用**作用域层级**，某些功能同时存在于全局（`~/.claude/`）和项目（`.claude/`）层级，而其他功能则仅限全局。设计原则是：*个人状态*或*跨项目协调*相关内容放在全局；*团队可共享的项目配置*则放在项目层级。
-
-- `~/.claude/` 是你的**用户级根目录**（全局，适用于所有项目）
-- 仓库内的 `.claude/` 是你的**项目级根目录**（仅限于该项目）
+1. [Overview](#overview)
+2. [Global-Only Features](#global-only-features)
+3. [Dual-Scope Features](#dual-scope-features)
+4. [Settings Precedence](#settings-precedence)
+5. [Directory Structure Comparison](#directory-structure-comparison)
+6. [Tasks System](#tasks-system)
+7. [Agent Teams](#agent-teams)
+8. [Design Principles](#design-principles)
+9. [Sources](#sources)
 
 ---
 
-## 全局专属功能
+## Overview
 
-以下功能**仅**位于 `~/.claude/` 下，无法限定在项目范围：
+Claude Code 使用**scope 层次结构**，其中一些功能在 global（`~/.claude/`）和 project（`.claude/`）级别都存在，而另一些则仅限 global。设计原则：属于*个人状态*或*跨项目协调*的内容存储在 global；属于*团队可共享的项目 config* 的内容可以存在 project 级别。
 
-| 功能 | 位置 | 用途 |
+- `~/.claude/` 是你的 **user-level 主目录**（global，所有项目）
+- `.claude/` 在仓库中是你的 **project-level 主目录**（仅限于该项目）
+
+---
+
+## Global-Only Features
+
+这些**仅**存在于 `~/.claude/` 下，无法限定到某个项目：
+
+| Feature | Location | Purpose |
 |---------|----------|---------|
-| **任务 (Tasks)** | `~/.claude/tasks/` | 跨会话和跨 agent 的持久化任务列表 |
-| **Agent 团队** | `~/.claude/teams/` | 多 agent 协调配置（实验性，2026 年 2 月） |
-| **自动记忆 (Auto Memory)** | `~/.claude/projects/<hash>/memory/` | Claude 为每个项目自写的学习内容（个人专属，从不共享） |
-| **凭据与 OAuth** | 系统钥匙串 + `~/.claude.json` | API 密钥、OAuth 令牌（绝不会放在项目文件中） |
-| **按键绑定 (Keybindings)** | `~/.claude/keybindings.json` | 自定义键盘快捷键 |
-| **MCP 用户服务器** | `~/.claude.json`（`mcpServers` 键） | 跨所有项目的个人 MCP 服务器 |
-| **偏好设置/缓存** | `~/.claude.json` | 主题、模型、输出风格、会话状态 |
+| **Tasks** | `~/.claude/tasks/` | 跨 session 和 agents 的持久化任务列表 |
+| **Agent Teams** | `~/.claude/teams/` | 多 agent 协调配置（实验性，2026 年 2 月） |
+| **Auto Memory** | `~/.claude/projects/<hash>/memory/` | Claude 自我编写的每个项目的学习记录（个人，永不共享） |
+| **Credentials & OAuth** | 系统 keychain + `~/.claude.json` | API keys、OAuth tokens（永远不在项目文件中） |
+| **Keybindings** | `~/.claude/keybindings.json` | 自定义键盘快捷键 |
+| **MCP User Servers** | `~/.claude.json`（`mcpServers` key） | 跨所有项目的个人 MCP servers |
+| **Preferences/Cache** | `~/.claude.json` | 主题、模型、output style、session 状态 |
 
 ---
 
-## 双作用域功能
+## Dual-Scope Features
 
-以下功能同时存在于两个层级，**项目层级优先于全局层级**：
+这些在两个级别都存在，**project-level 优先于** global：
 
-| 功能 | 全局（`~/.claude/`） | 项目（`.claude/`） | 优先级 |
+| Feature | Global（`~/.claude/`） | Project（`.claude/`） | 优先级 |
 |---------|----------------------|---------------------|------------|
-| **CLAUDE.md** | `~/.claude/CLAUDE.md` | `./CLAUDE.md` 或 `.claude/CLAUDE.md` | 项目覆盖全局 |
-| **设置 (Settings)** | `~/.claude/settings.json` | `.claude/settings.json` + `.claude/settings.local.json` | 项目 > 全局 |
-| **规则 (Rules)** | `~/.claude/rules/*.md` | `.claude/rules/*.md` | 项目覆盖 |
-| **Agents/Subagents** | `~/.claude/agents/*.md` | `.claude/agents/*.md` | 项目覆盖 |
-| **命令 (Commands)** | `~/.claude/commands/*.md` | `.claude/commands/*.md` | 两者均可用 |
-| **技能 (Skills)** | `~/.claude/skills/` | `.claude/skills/` | 两者均可用 |
-| **钩子 (Hooks)** | `~/.claude/hooks/` | `.claude/hooks/` | 两者均执行 |
-| **MCP 服务器** | `~/.claude.json`（用户作用域） | `.mcp.json`（项目作用域） | 三个作用域：local > project > user |
+| **CLAUDE.md** | `~/.claude/CLAUDE.md` | `./CLAUDE.md` 或 `.claude/CLAUDE.md` | Project 覆盖 global |
+| **Settings** | `~/.claude/settings.json` | `.claude/settings.json` + `.claude/settings.local.json` | Project > Global |
+| **Rules** | `~/.claude/rules/*.md` | `.claude/rules/*.md` | Project 覆盖 |
+| **Agents/Subagents** | `~/.claude/agents/*.md` | `.claude/agents/*.md` | Project 覆盖 |
+| **Commands** | `~/.claude/commands/*.md` | `.claude/commands/*.md` | 两者均可用 |
+| **Skills** | `~/.claude/skills/` | `.claude/skills/` | 两者均可用 |
+| **Hooks** | `~/.claude/hooks/` | `.claude/hooks/` | 两者均执行 |
+| **MCP Servers** | `~/.claude.json`（user scope） | `.mcp.json`（project scope） | 三个 scope：local > project > user |
 
 ---
 
-## 设置优先级
+## Settings Precedence
 
-用户可写的设置按以下覆盖顺序应用（从高到低）：
+用户可写的 settings 按此覆盖顺序应用（从最高到最低）：
 
-| 优先级 | 位置 | 作用域 | 版本控制 | 用途 |
+| Priority | Location | Scope | Version Control | Purpose |
 |----------|----------|-------|-----------------|---------|
-| 1 | 命令行标志 | 会话 | 不适用 | 单会话覆盖 |
-| 2 | `.claude/settings.local.json` | 项目 | 否（git-ignored） | 个人项目专属 |
-| 3 | `.claude/settings.json` | 项目 | 是（已提交） | 团队共享设置 |
-| 4 | `~/.claude/settings.local.json` | 用户 | 不适用 | 个人全局覆盖 |
-| 5 | `~/.claude/settings.json` | 用户 | 不适用 | 全局个人设置 |
+| 1 | 命令行 flags | Session | 不适用 | 单次 session 覆盖 |
+| 2 | `.claude/settings.local.json` | Project | No（git-ignored） | 个人项目特定 |
+| 3 | `.claude/settings.json` | Project | Yes（已提交） | 团队共享 settings |
+| 4 | `~/.claude/settings.local.json` | User | 不适用 | 个人 global 覆盖 |
+| 5 | `~/.claude/settings.json` | User | 不适用 | Global 个人 settings |
 
-策略层：`managed-settings.json` 由组织强制实施，本地文件无法覆盖。
+策略层：`managed-settings.json` 是组织强制的，不能被本地文件覆盖。
 
-**重要**：`deny` 规则具有最高的安全优先级，低优先级的 allow/ask 规则无法覆盖。
+**重要**：`deny` 规则具有最高的安全优先级，不能被低优先级的 allow/ask 规则覆盖。
 
 ---
 
-## 目录结构对比
+## Directory Structure Comparison
 
-### 全局作用域（`~/.claude/`）
+### Global Scope（`~/.claude/`）
 
 ```
 ~/.claude/
-├── settings.json              # 用户级设置（所有项目）
+├── settings.json              # User-level settings（所有项目）
 ├── settings.local.json        # 个人覆盖
-├── CLAUDE.md                  # 用户记忆（所有项目）
-├── agents/                    # 用户 subagent（适用于所有项目）
+├── CLAUDE.md                  # User memory（所有项目）
+├── agents/                    # User subagents（对所有项目可用）
 │   └── *.md
-├── rules/                     # 用户级模块化规则
+├── rules/                     # User-level 模块化 rules
 │   └── *.md
-├── commands/                  # 用户级命令
+├── commands/                  # User-level commands
 │   └── *.md
-├── skills/                    # 用户级技能
+├── skills/                    # User-level skills
 │   └── */SKILL.md
-├── tasks/                     # 全局专用：任务列表
+├── tasks/                     # GLOBAL-ONLY：任务列表
 │   └── {task-list-id}/
-├── teams/                     # 全局专用：Agent 团队配置
+├── teams/                     # GLOBAL-ONLY：Agent team 配置
 │   └── {team-name}/
 │       └── config.json
-├── projects/                  # 全局专用：按项目的自动记忆
+├── projects/                  # GLOBAL-ONLY：每个项目的 auto-memory
 │   └── {project-hash}/
 │       └── memory/
 │           ├── MEMORY.md
 │           └── *.md
-├── keybindings.json           # 全局专用：键盘快捷键
-└── hooks/                     # 用户级钩子
+├── keybindings.json           # GLOBAL-ONLY：键盘快捷键
+└── hooks/                     # User-level hooks
     ├── scripts/
     └── config/
 
-~/.claude.json                 # 全局专用：MCP 服务器、OAuth、偏好设置、缓存
+~/.claude.json                 # GLOBAL-ONLY：MCP servers、OAuth、preferences、caches
 ```
 
-### 项目作用域（`.claude/`）
+### Project Scope（`.claude/`）
 
 ```
 .claude/
-├── settings.json              # 团队共享设置
+├── settings.json              # 团队共享 settings
 ├── settings.local.json        # 个人项目覆盖（git-ignored）
-├── CLAUDE.md                  # 项目记忆（替代 ./CLAUDE.md）
-├── agents/                    # 项目 subagent
+├── CLAUDE.md                  # Project memory（替代 ./CLAUDE.md）
+├── agents/                    # Project subagents
 │   └── *.md
-├── rules/                     # 项目级模块化规则
+├── rules/                     # Project-level 模块化 rules
 │   └── *.md
-├── commands/                  # 自定义斜杠命令
+├── commands/                  # 自定义 slash commands
 │   └── *.md
-├── skills/                    # 自定义技能
+├── skills/                    # 自定义 skills
 │   └── {skill-name}/
 │       ├── SKILL.md
 │       └── supporting-files/
-├── hooks/                     # 项目级钩子
+├── hooks/                     # Project-level hooks
 │   ├── scripts/
 │   └── config/
-└── plugins/                   # 已安装的插件
+└── plugins/                   # 已安装的 plugins
 
-.mcp.json                      # 项目作用域的 MCP 服务器（仓库根目录）
+.mcp.json                      # Project-scoped MCP servers（仓库根目录）
 ```
 
 ---
 
-## 任务系统
+## Tasks System
 
-于 **Claude Code v2.1.16**（2026 年 1 月 22 日）引入，取代了已废弃的 TodoWrite 系统。
+在 **Claude Code v2.1.16**（2026 年 1 月 22 日）中引入，取代已弃用的 TodoWrite 系统。
 
 ### 存储
 
-任务存储在本地文件系统的 `~/.claude/tasks/` 中（非云端数据库）。这使得任务状态可审计、可版本控制、可从崩溃中恢复。
+Tasks 存储在本地文件系统的 `~/.claude/tasks/` 中（不在云数据库中）。这使得 task 状态可审计、可版本控制且可崩溃恢复。
 
-### 工具
+### Tools
 
-| 工具 | 用途 |
+| Tool | Purpose |
 |------|---------|
-| **TaskCreate** | 使用 `subject`、`description` 和 `activeForm` 创建新任务 |
-| **TaskGet** | 按 ID 检索特定任务的完整详情 |
-| **TaskUpdate** | 更改状态、设置所有者、添加依赖项或删除 |
-| **TaskList** | 列出所有任务及其当前状态 |
+| **TaskCreate** | 创建新 task，包含 `subject`、`description` 和 `activeForm` |
+| **TaskGet** | 按 ID 获取特定 task 的完整详情 |
+| **TaskUpdate** | 更改状态、设置 owner、添加依赖关系或删除 |
+| **TaskList** | 列出所有 tasks 及其当前状态 |
 
-### 任务生命周期
+### Task Lifecycle
 
 ```
 pending  →  in_progress  →  completed
 ```
 
-### 依赖管理
+### Dependency Management
 
-任务可通过 `addBlockedBy`/`addBlocks` 阻塞其他任务，形成依赖关系图，防止过早执行。
+Tasks 可以通过 `addBlockedBy`/`addBlocks` 阻止其他 tasks，创建防止过早执行的依赖关系图。
 
-### 多会话协作
+### Multi-Session Collaboration
 
 ```bash
 CLAUDE_CODE_TASK_LIST_ID=my-project-tasks claude
 ```
 
-所有共享同一 ID 的会话都能实时看到任务更新，从而支持并行工作流和会话恢复。
+共享相同 ID 的所有 session 实时看到 task 更新，支持并行工作流和 session 恢复。
 
-### 与旧版 Todos 的关键区别
+### 与旧 Todos 的关键区别
 
-| 功能 | 旧版 Todos | 新版 Tasks |
+| Feature | Old Todos | New Tasks |
 |---------|-----------|-----------|
-| 作用域 | 单一会话 | 跨会话、跨 agent |
-| 依赖关系 | 无 | 完整的依赖关系图 |
-| 存储 | 仅内存 | 文件系统（`~/.claude/tasks/`） |
-| 持久性 | 会话结束即丢失 | 重启和崩溃后仍保留 |
-| 多会话 | 不支持 | 通过 `CLAUDE_CODE_TASK_LIST_ID` 支持 |
+| Scope | 单 session | 跨 session、跨 agent |
+| Dependencies | 无 | 完整的依赖关系图 |
+| Storage | 仅内存中 | 文件系统（`~/.claude/tasks/`） |
+| Persistence | Session 结束时丢失 | 在重启和崩溃后仍然存在 |
+| Multi-session | 不可能 | 通过 `CLAUDE_CODE_TASK_LIST_ID` |
 
 ---
 
-## Agent 团队
+## Agent Teams
 
-于 **2026 年 2 月 5 日**宣布为实验性功能。Agent 团队允许多个 Claude Code 会话协调处理共享工作。
+于 **2026 年 2 月 5 日** 作为实验性功能宣布。Agent Teams 允许多个 Claude Code session 协调共享工作。
 
-### 启用方式
+### 启用
 
 ```json
 // 在 ~/.claude/settings.json 中
@@ -209,33 +209,33 @@ CLAUDE_CODE_TASK_LIST_ID=my-project-tasks claude
 
 ### 配置
 
-团队配置位于 `~/.claude/teams/{team-name}/`，支持以下模式：
+Team 配置位于 `~/.claude/teams/{team-name}/` 并支持以下模式：
 
-| 模式 | 描述 | 要求 |
+| Mode | Description | Requirements |
 |------|-------------|--------------|
-| **进程内 (In-process)**（默认） | 所有团队成员在你的终端内运行 | 无 |
-| **分屏 (Split panes)** | 每个团队成员拥有自己的窗格 | tmux 或 iTerm2（非 VS Code 终端） |
+| **In-process**（默认） | 所有 teammates 在你的终端内运行 | 无 |
+| **Split panes** | 每个 teammate 获得自己的 pane | tmux 或 iTerm2（不可用 VS Code terminal） |
 
 ---
 
-## 设计原则
+## Design Principles
 
-全局专属与双作用域的划分遵循清晰的模式：
+global-only 与 dual-scope 的划分遵循清晰的模式：
 
-| 类别 | 作用域 | 理由 |
+| Category | Scope | Rationale |
 |----------|-------|-----------|
-| **协调状态**（tasks、teams） | 全局专属 | 需要超越单个项目持久存在 |
-| **安全状态**（凭据、OAuth） | 全局专属 | 防止意外提交到版本控制 |
-| **个人学习**（自动记忆） | 全局专属 | 用户专属，不可团队共享 |
-| **输入偏好**（按键绑定） | 全局专属 | 用户肌肉记忆，非项目专属 |
-| **配置**（settings、rules、agents） | 双层级 | 团队需要共享项目专属行为 |
-| **工作流定义**（commands、skills） | 双层级 | 可以是个人或团队共享 |
+| **Coordination state**（tasks, teams） | Global-only | 需要超越任何单个项目的持久性 |
+| **Security state**（credentials, OAuth） | Global-only | 防止意外提交到版本控制 |
+| **Personal learning**（auto-memory） | Global-only | 用户特定，不可团队共享 |
+| **Input preferences**（keybindings） | Global-only | 用户肌肉记忆，非项目特定 |
+| **Configuration**（settings, rules, agents） | 两种级别 | 团队需要共享项目特定行为 |
+| **Workflow definitions**（commands, skills） | 两种级别 | 可以是个人的或团队共享的 |
 
-自动记忆（`~/.claude/projects/<hash>/memory/`）是一个值得注意的混合体：它*关于*特定项目，但存储*在全局*，因为它代表个人学习内容而非团队可共享的配置。
+Auto-memory（`~/.claude/projects/<hash>/memory/`）是一个值得注意的混合体：它*关于*特定项目，但存储在*global*，因为它代表个人学习而非团队可共享的配置。
 
 ---
 
-## 来源
+## Sources
 
 - [Claude Code Settings Documentation](https://code.claude.com/docs/en/settings)
 - [Orchestrate Teams of Claude Code Sessions](https://code.claude.com/docs/en/agent-teams)

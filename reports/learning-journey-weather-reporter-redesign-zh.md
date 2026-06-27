@@ -1,262 +1,262 @@
-# 学习历程 — 天气记者重新设计计划
+# Learning Journey — Weather Reporter 重新设计方案
 
 ← 返回 [README](../README.md)
 
 ## 概述
 
-围绕一个贯穿始终的示例重新设计第7张幻灯片之后的所有幻灯片：**天气记者 agent**。叙述线索与 TOC 可见顺序一致（Agents → Skills → Context → CLAUDE.md → Commands+Workflow），让观众先认识天气记者，然后了解他们知道什么、如何思考、遵循哪些规则，最后了解如何用一个命令触发他们。
+围绕一个贯穿始终的示例——**weather reporter agent**——重新设计 slide 7 及之后的所有 slides。叙事弧线匹配 TOC 可见顺序（Agents → Skills → Context → CLAUDE.md → Commands+Workflow），让观众先认识 weather reporter，然后理解它知道什么、如何思考、遵循什么规则，最后了解如何用一个 command 触发它。
 
 ---
 
-## 1. 当前 → 新章节映射
+## 1. 当前 → 新 Section 映射
 
-| 当前章节 | 当前幻灯片 | 操作 | 新位置 |
+| Current section | Current slides | Action | New position |
 |---|---|---|---|
-| 主题 1: Context | 7-11 (章节起始于 7) | 移至主题 3 | 幻灯片 17-21 |
-| 主题 2: CLAUDE.md | 12-17 (章节起始于 12) | 移至主题 4 | 幻灯片 22-27 |
-| 主题 3: Agents | 18-23 (章节起始于 18) | 移至主题 1 | 幻灯片 7-12 |
-| 主题 4: Skills | 24-29 (章节起始于 24) | 移至主题 2 | 幻灯片 13-18 |
-| 主题 5: Commands | 30-32 (章节起始于 30) | 与 Workflow 合并为主题 5 | 幻灯片 28-32 |
-| 主题 6: Workflow | 33-36 (章节起始于 33) | 合并到 Commands 章节 | (无独立章节幻灯片) |
-| 结束幻灯片 | 37 | 保留，更新副标题 | 幻灯片 33 |
+| Topic 1: Context | 7-11（section 在 7） | 移至 Topic 3 | slides 17-21 |
+| Topic 2: CLAUDE.md | 12-17（section 在 12） | 移至 Topic 4 | slides 22-27 |
+| Topic 3: Agents | 18-23（section 在 18） | 移至 Topic 1 | slides 7-12 |
+| Topic 4: Skills | 24-29（section 在 24） | 移至 Topic 2 | slides 13-18 |
+| Topic 5: Commands | 30-32（section 在 30） | 与 Workflow 合并为 Topic 5 | slides 28-32 |
+| Topic 6: Workflow | 33-36（section 在 33） | 合并到 Commands section | （无独立 section slide） |
+| Closing slide | 37 | 保留，更新副标题 | slide 33 |
 
-**新总计: 33 张幻灯片**（当前 37 张减去 Workflow 章节幻灯片和 3 张合并到 Commands 章节的 Workflow 内容幻灯片，后者增加 3 张）。
+**新总计：33 slides**（与当前的 37 相同，减去 Workflow section slide 和 3 个合并到 Commands section 的 Workflow content slides，该 section 因此增加 3 个 slides）。
 
-等等——让我重新计算：
+等等——让我重新计数：
 
-当前: 幻灯片 7-37 = 31 张。
-- Agents 章节: 6 张 (18-23) → 成为主题 1 (7-12)
-- Skills 章节: 6 张 (24-29) → 成为主题 2 (13-18)
-- Context 章节: 5 张 (7-11) → 成为主题 3 (19-23)
-- CLAUDE.md 章节: 6 张 (12-17) → 成为主题 4 (24-29)
-- Commands+Workflow 合并: 3 + 1 章节 + 4 内容 = Commands (3) + Workflow (1 章节 + 3 内容) = 7 张 → 成为主题 5 (30-36)
-- 结束: 1 张 (37)
+当前：slides 7-37 = 31 slides。
+- Agents section：6 slides（18-23）→ 变为 Topic 1（7-12）
+- Skills section：6 slides（24-29）→ 变为 Topic 2（13-18）
+- Context section：5 slides（7-11）→ 变为 Topic 3（19-23）
+- CLAUDE.md section：6 slides（12-17）→ 变为 Topic 4（24-29）
+- Commands+Workflow 合并：3 + 1 section + 4 content = Commands (3) + Workflow (1 section + 3 content) = 7 slides → 变为 Topic 5 (30-36)
+- Closing：1 slide (37)
 
-**新总计: 37 张幻灯片。**（没有幻灯片被删除；Workflow 章节幻灯片成为合并后的 Commands+Workflow 章节的一部分——我们将其保留为子章节或移除其 `data-level` 以避免出现第二个章节分隔。）
+**新总计：37 slides。**（没有 slides 被删除；Workflow section slide 成为合并的 Commands+Workflow section 的一部分——我们保留它作为子 section 或移除其 `data-level` 以避免第二个 section divider。）
 
-**决定**: 保留全部 37 张幻灯片。移除旧 Workflow 章节分隔（幻灯片 33）上的 `data-level`，使其被视为内容幻灯片而非章节分隔。Commands 章节覆盖 30-36。Workflow 章节分隔成为 Commands 章节内的一个可视化"章节标题"。
+**决定**：保留所有 37 个 slides。移除旧的 Workflow section divider（slide 33）上的 `data-level`，使其被视为 content slide 而非 section divider。Commands section 涵盖 30-36。Workflow section divider 成为 Commands section 内的视觉"章节标题"。
 
-实际上，更简单的方法：将 Workflow 章节分隔保留为内容幻灯片，不带 `data-level`。历程栏保持在 `commands` 级别。章节编号文字从"主题 6"改为子标题。
-
----
-
-## 2. 新的 LEVELS 映射（键和颜色不变）
-
-新的章节顺序为：**Agents → Skills → Context → CLAUDE.md → Commands**。`workflow` 级别键从 `data-level` 使用中退役（章节分隔失去 `data-level`）。`LEVELS` 映射仍保留 `workflow` 用于历程栏历史显示，但没有幻灯片触发它。
-
-**修订方案**: 由于没有幻灯片携带 `data-level="workflow"`，将 `workflow` 级别完全从 LEVELS 映射中移除。历程栏最高到 `commands` (83%)。这没问题——Workflow 章节作为 Commands 章节内部的*高潮*呈现，而不是一个独立主题。
-
-实际上，历程栏填充到 83% 而不是 100% 作为结束章节，这令人不满意。更好的方案：**将 Commands+Workflow 合并为一个名为"Commands & Workflow"的章节**，使用 `data-level="commands"`。在 LEVELS 中将 `workflow` 级别保留为 100%，并将 `data-level="workflow"` 分配给*旧的* workflow 章节分隔幻灯片——它成为 Commands 章节内的一个视觉过渡。这样，历程栏在 workflow 幻灯片处填满到 100%。
-
-**最终决定**: 在 LEVELS 中同时保留 `commands` (83%) 和 `workflow` (100%)。将 `data-level="commands"` 分配给 Commands 章节分隔，将 `data-level="workflow"` 分配给 Workflow 子章节幻灯片。历程标记保持不变。这与当前结构完全一致——只是内容幻灯片重新排序。
+实际上，更简单：保留 Workflow section divider 作为无 `data-level` 的 content slide。journey bar 停留在 `commands` 级别。section 编号文本从"Topic 6"改为仅一个子标题。
 
 ---
 
-## 3. 逐张幻灯片内容大纲
+## 2. 新的 LEVELS 映射（键或颜色不变）
 
-### 幻灯片 1-6（不变）
+新的 section 顺序是：**Agents → Skills → Context → CLAUDE.md → Commands**。`workflow` 级别键从 `data-level` 使用中退役（section divider 失去 `data-level`）。`LEVELS` 映射仍为 journey-bar 历史显示保留 `workflow`，但没有 slide 触发它。
 
-幻灯片 1（标题）、2（Boris GIF）、3（Vibe→Agentic）、4（什么是 Vibe Coding）、5（好提示与差提示）、6（TOC——仅更新 `goToSlide` 目标）。
+**修订后方法**：完全从 LEVELS 映射中删除 `workflow` 级别，因为没有 slide 带有 `data-level="workflow"`。journey bar 最高到 `commands`（83%）。这没问题——Workflow section 是作为 Commands section *内部*的高潮呈现的，而不是独立主题。
 
-**幻灯片 6 上的 TOC 更新：**
-- Agents 行: `goToSlide(7)`（原为 18）
-- Skills 行: `goToSlide(13)`（原为 24）
-- Context 行: `goToSlide(19)`（原为 7）
-- CLAUDE.md 行: `goToSlide(25)`（原为 12）
-- Commands 行: `goToSlide(30)`（原为 30——不变）
+实际上，journey bar 在 closing section 填到 83% 而非 100% 让人不太满意。更好的方案：**将 Commands+Workflow 合并为一个名为 "Commands & Workflow" 的 section**，使用 `data-level="commands"`。在 LEVELS 中保留 `workflow` 级别在 100%，并为*旧的* workflow section-divider slide 分配 `data-level="workflow"`——它成为 Commands section 内的视觉过渡。这样 bar 在 workflow slides 处填到 100%。
+
+**最终决定**：在 LEVELS 中同时保留 `commands` (83%) 和 `workflow` (100%)。为 Commands section divider 分配 `data-level="commands"`，为 Workflow 子 section slide 分配 `data-level="workflow"`。Journey ticks 保持不变。这与当前结构完全匹配——只是 content slides 重新排序。
 
 ---
 
-### 章节 1: Agents（幻灯片 7-12）——"这个人"
+## 3. Slide-by-Slide 内容大纲
 
-**幻灯片 7** — 章节分隔（`data-level="agents"`，主题 1）
-- 标题: "Agents — 天气记者"
-- 描述: "Agent 是扮演特定角色的 Claude。认识一下天气记者——一位受雇获取并报告迪拜天气数据的专家。"
+### Slides 1-6（不变）
 
-**幻灯片 8** — "餐厅厨房"（当前幻灯片 19）
-- 内容: 保持相同类比（普通提示 = 在随机厨房里喊叫；agent = 特定专家）
-- 更新 agent 示例，全程使用"天气记者"框架
-- 保留比较普通提示与 weather-agent 的两栏卡片
+Slides 1（title）、2（Boris GIF）、3（Vibe→Agentic）、4（What is Vibe Coding）、5（Good vs Bad Prompts）、6（TOC——仅更新 goToSlide 目标）。
 
-**幻灯片 9** — "Prompting vs. Agent — 并排对比"（当前幻灯片 20）
-- 保持表格完整。已经很好地使用了天气示例。
+**Slide 6 上的 TOC 更新：**
+- Agents 行：`goToSlide(7)`（原为 18）
+- Skills 行：`goToSlide(13)`（原为 24）
+- Context 行：`goToSlide(19)`（原为 7）
+- CLAUDE.md 行：`goToSlide(25)`（原为 12）
+- Commands 行：`goToSlide(30)`（原为 30——不变）
 
-**幻灯片 10** — "Agents 拥有自己的大脑"（当前幻灯片 21）
-- 保留 Thariq 的建议。与之关联："天气记者在自己的大脑中工作——所有网络抓取都留在你的大脑之外。"
+---
 
-**幻灯片 11** — "如何创建你自己的 Agent"（当前幻灯片 22）
-- 保留 `/agents` 操作指南模式
+### Section 1：Agents（slides 7-12）——"人"
+
+**Slide 7** — Section divider（`data-level="agents"`，Topic 1）
+- 标题："Agents — The Weather Reporter"
+- 描述："An agent is Claude playing a specific role. Meet the weather reporter — a specialist hired to fetch and report weather data for Dubai."
+
+**Slide 8** — "The Restaurant Kitchen"（当前 slide 19）
+- 内容：相同的类比（plain prompting = 在随机厨房里大喊；agent = 特定专家）
+- 更新 agent 示例，全程使用"weather reporter"框架
+- 保留对比 plain prompting vs weather-agent 的两列卡片
+
+**Slide 9** — "Prompting vs. Agent — Side by Side"（当前 slide 20）
+- 保留表格不变。已经很好地使用了天气示例。
+
+**Slide 10** — "Agents Get Their Own Brain"（当前 slide 21）
+- 保留 Thariq 的提示。关联到："the weather reporter works in their own brain — all that web fetching stays out of yours."
+
+**Slide 11** — "How to Create Your Own Agent"（当前 slide 22）
+- 保留 `/agents` how-to 模式
 - 更新代码块以显示真实的 `weather-agent.md` 路径
 
-**幻灯片 12** — "Agent 配置字段"（当前幻灯片 23）
-- 保留字段行表格。添加一个标注框，展示 `skills: [weather-fetcher]` 字段在上下文中的应用。
+**Slide 12** — "Agent Config Fields"（当前 slide 23）
+- 保留 field-row 表格。添加一个 callout box，在 context 中显示 `skills: [weather-fetcher]` 字段。
 
 ---
 
-### 章节 2: Skills（幻灯片 13-18）——"记者知道什么"
+### Section 2：Skills（slides 13-18）——"Reporter 知道什么"
 
-**幻灯片 13** — 章节分隔（`data-level="skills"`，主题 2）
-- 标题: "Skills — 天气记者知道什么"
-- 描述: "Skills 是记者经过训练能够完成的特定任务。我们的记者有两项：获取数据，并将其渲染为卡片。"
+**Slide 13** — Section divider（`data-level="skills"`，Topic 2）
+- 标题："Skills — What the Weather Reporter Knows"
+- 描述："Skills are the specific things the reporter has been trained to do. Our reporter has two: fetch the data, and render it as a card."
 
-**幻灯片 14** — "训练手册"（当前幻灯片 25）
-- 重新框架：天气记者有两项 skill：weather-fetcher（获取温度）和 weather-svg-creator（创建可视化卡片）。
-- 用天气记者的两项 skill 替换"Shayan"示例。
+**Slide 14** — "The Training Manual"（当前 slide 25）
+- 重新框架：weather reporter 有两个 skills：weather-fetcher（获取温度）和 weather-svg-creator（创建视觉卡片）。
+- 用 weather reporter 的两个 skills 替换"Shayan"示例。
 
-**幻灯片 15** — "何时将某事物转化为 Skill"（当前幻灯片 26）
-- 保留 Boris 建议。添加 weather-fetcher 和 weather-svg-creator 作为示例之二。
+**Slide 15** — "When to Turn Something Into a Skill"（当前 slide 26）
+- 保留 Boris 提示。将 weather-fetcher 和 weather-svg-creator 添加为其中两个示例。
 
-**幻灯片 16** — "为什么将 Agents 和 Skills 分开？"（当前幻灯片 27）
-- 保留两栏布局。更新以强调：weather-agent = 这个人，weather-fetcher = 他们的训练。
+**Slide 16** — "Why Separate Agents and Skills?"（当前 slide 27）
+- 保留两列。更新以强调：weather-agent = 人，weather-fetcher = 他们的培训。
 
-**幻灯片 17** — "如何创建你自己的 Skill"（当前幻灯片 28）
-- 保留。代码块已经展示了真实的 `weather-fetcher` SKILL.md 内容——完美。
+**Slide 17** — "How to Create Your Own Skill"（当前 slide 28）
+- 保留。代码块已经显示了真实的 `weather-fetcher` SKILL.md 内容——完美。
 
-**幻灯片 18** — "Skill 配置字段"（当前幻灯片 29）
-- 保留。添加说明：weather-fetcher 上设置了 `user-invocable: false`，因为它仅供 agent 使用。
-
----
-
-### 章节 3: Context（幻灯片 19-23）——"记者的大脑"
-
-**幻灯片 19** — 章节分隔（`data-level="context"`，主题 3）
-- 标题: "Context — 记者的大脑"
-- 描述: "现在你已经认识了记者并了解他们的技能，让我们来理解他们实际上能同时记住多少信息。"
-
-**幻灯片 20** — "Claude 的大脑"（当前幻灯片 8）
-- 保留。添加一句与天气记者关联的话："当 weather-agent 被派遣时，它获得自己全新的大脑——并且 weather-fetcher 在启动时就被固定在其中。"
-- 保留两个图示（context-window.jpeg 保留在此处）。
-
-**幻灯片 21** — "会话启动时加载什么"（当前幻灯片 9）
-- 保留。与天气记者关联："启动时，Claude 知道*关于* weather-fetcher 的信息（仅描述）。当命令运行时，完整的 skill 内容被加载到 agent 的大脑中。"
-- 保留 context.jpg 在此处。
-
-**幻灯片 22** — "保持大脑清晰"（当前幻灯片 10）
-- 保留分支点表格。
-
-**幻灯片 23** — "如何管理你的 Context"（当前幻灯片 11）
-- 保留 `/context`、`/compact`、`/clear` 操作指南。
+**Slide 18** — "Skill Config Fields"（当前 slide 29）
+- 保留。添加注释：weather-fetcher 上设置了 `user-invocable: false`，因为它是 agent-only 的。
 
 ---
 
-### 章节 4: CLAUDE.md（幻灯片 24-29）——"口袋规则手册"
+### Section 3：Context（slides 19-23）——"Reporter 的大脑"
 
-**幻灯片 24** — 章节分隔（`data-level="claude-md"`，主题 4）
-- 标题: "CLAUDE.md — 记者的口袋规则手册"
-- 描述: "记者每次轮班开始时都会查阅这本手册——即使他们的大脑在夜间重置。"
+**Slide 19** — Section divider（`data-level="context"`，Topic 3）
+- 标题："Context — The Reporter's Brain"
+- 描述："Now that you've met the reporter and know their skills, let's understand what they can actually hold in mind at once."
 
-**幻灯片 25** — "员工手册"（当前幻灯片 13）
-- 保留。更新为天气记者框架：CLAUDE.md 是记者在播报前阅读的规则手册——"除非被要求，始终以摄氏度报告，始终注明来源。"
+**Slide 20** — "Claude's Brain"（当前 slide 8）
+- 保留。添加一句关联到 weather reporter："When the weather-agent is dispatched, it gets its own fresh brain — and weather-fetcher is pinned into it at startup."
+- 保留两个图表（context-window.jpeg 留在此处）。
 
-**幻灯片 26** — "如何创建你的 CLAUDE.md"（当前幻灯片 14）
-- 保留 `/init` 操作指南。
+**Slide 21** — "What Loads at Session Start"（当前 slide 9）
+- 保留。关联到 weather reporter："At startup, Claude knows *about* weather-fetcher (description only). When the command runs, the full skill content is loaded into the agent's brain."
+- 将 context.jpg 保留在此处。
 
-**幻灯片 27** — "每次犯错后完善 CLAUDE.md"（当前幻灯片 15）
-- 保留 Boris 建议。
+**Slide 22** — "Keep the Brain Clear"（当前 slide 10）
+- 保留 branching-point 表格。
 
-**幻灯片 28** — "CLAUDE.md 中包含什么"（当前幻灯片 16）
-- 保留代码块。天气记者关联：添加一条注释，展示天气特定的规则。
+**Slide 23** — "How to Manage Your Context"（当前 slide 11）
+- 保留 `/context`、`/compact`、`/clear` 的 how-to。
 
-**幻灯片 29** — "CLAUDE.md 如何加载"（当前幻灯片 17）
+---
+
+### Section 4：CLAUDE.md（slides 24-29）——"口袋规则手册"
+
+**Slide 24** — Section divider（`data-level="claude-md"`，Topic 4）
+- 标题："CLAUDE.md — The Reporter's Pocket Rulebook"
+- 描述："The reporter consults this at the start of every shift — even though their brain resets overnight."
+
+**Slide 25** — "The Employee Handbook"（当前 slide 13）
+- 保留。更新为 weather-reporter 框架：CLAUDE.md 是 reporter 上镜前阅读的规则手册——"always report in Celsius unless asked, always cite the source."
+
+**Slide 26** — "How to Create Your CLAUDE.md"（当前 slide 14）
+- 保留 `/init` how-to。
+
+**Slide 27** — "Grow CLAUDE.md With Every Mistake"（当前 slide 15）
+- 保留 Boris 提示。
+
+**Slide 28** — "What Goes in CLAUDE.md"（当前 slide 16）
+- 保留代码块。Weather reporter 触感：添加一个注释展示天气特定规则。
+
+**Slide 29** — "How CLAUDE.md Loads"（当前 slide 17）
 - 保留。
 
 ---
 
-### 章节 5: Commands + Workflow（幻灯片 30-36）——"触发器"
+### Section 5：Commands + Workflow（slides 30-36）——"触发器"
 
-**幻灯片 30** — 章节分隔（`data-level="commands"`，主题 5）
-- 标题: "Commands — 触发器"
-- 描述: "一个词启动整个链条。`/weather-orchestrator` → agent → skill → SVG 卡片。"
+**Slide 30** — Section divider（`data-level="commands"`，Topic 5）
+- 标题："Commands — The Trigger"
+- 描述："One word kicks off the whole chain. `/weather-orchestrator` → agent → skill → SVG card."
 
-**幻灯片 31** — "Commands — 入口点"（当前幻灯片 31）
-- 保留。很好的介绍。已经引用了 weather-orchestrator。
+**Slide 31** — "Commands — The Entry Point"（当前 slide 31）
+- 保留。很好的介绍。已引用 weather-orchestrator。
 
-**幻灯片 32** — "如何创建你自己的 Command"（当前幻灯片 32）
-- 保留。代码块已经展示了 weather-orchestrator.md。
+**Slide 32** — "How to Create Your Own Command"（当前 slide 32）
+- 保留。代码块已显示 weather-orchestrator.md。
 
-**幻灯片 33** — Workflow 子章节（原为幻灯片 33，`data-level="workflow"`）
-- 将章节编号文字从"主题 6"改为"融会贯通"
-- 保留 `data-level="workflow"` 以便历程栏填满至 100%。
-- 将标题更新为："Workflow — 五个部分整合在一起"
-- 描述: "观看天气记者示例从一次按键运行到 SVG 卡片输出。"
+**Slide 33** — Workflow 子 section（原为 slide 33，`data-level="workflow"`）
+- 将 section-number 文本从"Topic 6"改为"Putting It All Together"
+- 保留 `data-level="workflow"`，使 bar 填到 100%。
+- 更新标题为："Workflow — All Five Pieces Together"
+- 描述："Watch the weather reporter example run from one keystroke to SVG card output."
 
-**幻灯片 34** — "Command → Agent → Skill"（当前幻灯片 34）
-- 保留代码块流程图示。它已经很完美了。
+**Slide 34** — "Command → Agent → Skill"（当前 slide 34）
+- 保留代码块流程图。已经很完美。
 
-**幻灯片 35** — "Skills 的两种使用方式"（当前幻灯片 35）
-- 保留比较预加载与直接调用的两栏布局。
+**Slide 35** — "Two Ways Skills Are Used"（当前 slide 35）
+- 保留两列对比 preloaded vs direct invocation。
 
-**幻灯片 36** — "如何搭建你自己的 Workflow"（当前幻灯片 36）
-- 保留。已经使用天气 workflow 作为示例。
+**Slide 36** — "How to Wire Your Own Workflow"（当前 slide 36）
+- 保留。已使用 weather workflow 作为示例。
 
-**幻灯片 37** — 结束（当前幻灯片 37）
-- 保留。将副标题更新为："五个概念，一个贯穿始终的示例"
-- 更新正文文字以引用天气记者的叙述线索。
+**Slide 37** — Closing（当前 slide 37）
+- 保留。更新副标题为："Five concepts, one running example"
+- 更新正文引用 weather reporter 弧线。
 
 ---
 
-## 4. 资产复用清单
+## 4. Asset 复用清单
 
-| 资产 | 当前位置 | 新位置 | 操作 |
+| Asset | Current location | New location | Action |
 |---|---|---|---|
-| `context-window.jpeg` | 幻灯片 8 (Claude's Brain) | 幻灯片 20 (相同内容，重新编号) | 保留——无需更改 |
-| `context.jpg` | 幻灯片 9 (What Loads at Session Start) | 幻灯片 21 (相同内容，重新编号) | 保留——无需更改 |
-| `../../!/claude-jumping.svg` | 幻灯片 1，页眉 | 不变 | 无需操作 |
-| `../../!/root/boris-slider.gif` | 幻灯片 2 | 不变 | 无需操作 |
+| `context-window.jpeg` | Slide 8（Claude's Brain） | Slide 20（相同内容，重新编号） | 保留——无需更改 |
+| `context.jpg` | Slide 9（What Loads at Session Start） | Slide 21（相同内容，重新编号） | 保留——无需更改 |
+| `../../!/claude-jumping.svg` | Slides 1, header | 不变 | 无需操作 |
+| `../../!/root/boris-slider.gif` | Slide 2 | 不变 | 无需操作 |
 
-两个 context 图示原封不动地保留——包含它们的幻灯片只是被重新编号（8→20，9→21）。
+两个 context 图表都保留在原来的位置——包含它们的 slides 只是重新编号（8→20, 9→21）。
 
 ---
 
-## 5. 簿记影响
+## 5. Bookkeeping 影响
 
-### 新的章节分隔位置和 `data-level` 分配
+### 新的 section-divider 位置和 `data-level` 分配
 
-| 幻灯片 | 主题 | `data-level` |
+| Slide | Topic | `data-level` |
 |---|---|---|
 | 7 | Agents | `agents` |
 | 13 | Skills | `skills` |
 | 19 | Context | `context` |
 | 25 | CLAUDE.md | `claude-md` |
 | 30 | Commands | `commands` |
-| 33 | Workflow 子章节 | `workflow` |
+| 33 | Workflow sub-section | `workflow` |
 
-### TOC `goToSlide` 目标（幻灯片 6）
+### Slide 6 上的 TOC `goToSlide` 目标
 
-| 行 | 主题 | 旧目标 | 新目标 |
+| Row | Topic | Old target | New target |
 |---|---|---|---|
-| 行 1 | Agents | 18 | 7 |
-| 行 2 | Skills | 24 | 13 |
-| 行 3 | Context | 7 | 19 |
-| 行 4 | CLAUDE.md | 12 | 25 |
-| 行 5 | Commands | 30 | 30 |
+| Row 1 | Agents | 18 | 7 |
+| Row 2 | Skills | 24 | 13 |
+| Row 3 | Context | 7 | 19 |
+| Row 4 | CLAUDE.md | 12 | 25 |
+| Row 5 | Commands | 30 | 30 |
 
-### 历程标记（不变）
+### Journey ticks（不变）
 
-历程标记轨道已按从上到下的顺序排列为：Workflow, Commands, Skills, Agents, CLAUDE.md, Context。这与叙述线索顺序*相反*（顶部 = 最高级别 = 最后达到）。无需更改。
+Journey tick rail 已经从上到下排序为：Workflow、Commands、Skills、Agents、CLAUDE.md、Context。这与弧线顺序*相反*（顶部 = 最高级别 = 最后达到）。无需更改。
 
 ### LEVELS 映射（不变）
 
-所有 6 个级别键（`context`, `claude-md`, `agents`, `skills`, `commands`, `workflow`）保持不变。没有添加或移除任何键。
+所有 6 个 level keys（`context`、`claude-md`、`agents`、`skills`、`commands`、`workflow`）保留。没有添加或删除 keys。
 
 ---
 
-## 6. 实施方案
+## 6. 实现方法
 
-HTML 是一个大文件。对于新的叙述线索，幻灯片的顺序是错误的。最清晰的实施方法是：
+HTML 是一个大文件。Slides 的当前顺序与新弧线不匹配。最干净的实现方法是：
 
-1. 剪切幻灯片 div 并按新顺序粘贴（7-12 = 旧 18-23，13-18 = 旧 24-29，19-23 = 旧 7-11，24-29 = 旧 12-17，30-37 不变）。
+1. 剪切 slide divs 并按新顺序粘贴（7-12 = old 18-23, 13-18 = old 24-29, 19-23 = old 7-11, 24-29 = old 12-17, 30-37 不变）。
 2. 按顺序重新编号所有 `data-slide` 属性。
-3. 更新章节幻灯片的 `data-level` 属性。
-4. 更新章节分隔上的章节编号文字和 h1。
-5. 更新幻灯片 6 上的 TOC `goToSlide` 目标。
-6. 更新 Workflow 章节幻灯片（旧幻灯片 33）的章节编号文字。
-7. 在需要的地方对天气记者框架进行有针对性的内容编辑。
+3. 更新 section-slide `data-level` 属性。
+4. 更新 section dividers 上的 section-number 文本和 h1。
+5. 更新 slide 6 上的 TOC `goToSlide` 目标。
+6. 更新 Workflow section-slide（旧 33）的 section-number 文本。
+7. 在需要的地方进行有针对性的 weather-reporter 框架内容编辑。
 
-幻灯片总数：**37**（不变）。
+总 slide 数量：**37**（不变）。
 
 ---
 
-## 7. 模糊点——无关键性影响
+## 7. 歧义——无负载相关
 
-所有模糊点已在上述内容中解决。直接进入实施阶段。
+所有歧义已在上文中解决。直接进入实现阶段。
