@@ -3,25 +3,25 @@ paths:
   - "**/*.md"
 ---
 
-# Markdown 文档
+# Markdown Docs
 
 ## 文档标准
 
-- 保持文件专注且简洁 — 每份文件一个主题
-- 在文档之间使用相对链接（例如 `../best-practice/claude-memory.md`），而不是绝对 GitHub URL
-- 在最佳实践和报告文档顶部包含返回导航链接（参见现有文件了解格式）
-- 添加新概念或报告时，更新 README.md 中的相应表格（CONCEPTS 或 REPORTS）
+- 保持文件重点突出、内容简洁 — 每个文件一个主题
+- 在文档之间使用相对链接（例如 `../best-practice/claude-memory.md`），而非绝对 GitHub URL
+- 在 best-practice 和 report 文档的顶部包含返回导航链接（参见现有文件的模式）
+- 当添加新概念或报告时，更新 README.md 中对应的表格（CONCEPTS 或 REPORTS）
 
-## 结构约定
+## 结构规范
 
-- 最佳实践文档放在 `best-practice/`
-- 实现文档放在 `implementation/`
-- 报告放在 `reports/`
-- 技巧放在 `tips/`
-- 变更日志跟踪放在 `changelog/<category>/`
+- Best practice 文档放在 `best-practice/` 中
+- Implementation 文档放在 `implementation/` 中
+- Reports 放在 `reports/` 中
+- Tips 放在 `tips/` 中
+- Changelog tracking 放在 `changelog/<category>/` 中
 
-## 格式
+## 格式化
 
-- 使用表格进行结构化比较（参见 README CONCEPTS 表格作为参考）
-- 使用 `!/tags/` 的徽章图片，以便在链接最佳实践或实现文档时保持视觉一致性
-- 保持标题层级 — 不要跳级（例如，不要从 `##` 跳到 `####`）
+- 使用表格进行结构化比较（参见 README CONCEPTS 表作为参考）
+- 在链接 best-practice 或 implementation 文档时，使用来自 `!/tags/` 的 badge 图片以保持视觉一致性
+- 保持标题层次结构 — 不要跳过标题级别（例如不要从 `##` 直接跳到 `####`）

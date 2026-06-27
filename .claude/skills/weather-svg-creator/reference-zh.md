@@ -1,4 +1,4 @@
-# Weather SVG Creator — 参考文档
+# Weather SVG Creator — 参考
 
 ## SVG 模板
 
@@ -13,24 +13,24 @@
 
 ### 占位符
 
-| 占位符 | 替换为 | 示例 |
+| Placeholder | Replace with | Example |
 |-------------|-------------|---------|
-| `[Celsius/Fahrenheit]` | 输入中的完整单位名称 | `Celsius` |
-| `[value]` | 输入中的数字温度值 | `26.2` |
+| `[Celsius/Fahrenheit]` | 从输入获取的完整单位名称 | `Celsius` |
+| `[value]` | 从输入获取的温度数值 | `26.2` |
 | `[C/F]` | 单位缩写 | `C` 或 `F` |
 
-### 设计规格
+### 设计规范
 
-| 属性 | 值 |
+| Property | Value |
 |----------|-------|
 | 尺寸 | 300 x 160 px |
 | 圆角半径 | 12 px |
-| 背景色 | `#1a1a2e`（深海军蓝） |
+| 背景 | `#1a1a2e`（深海军蓝） |
 | 单位标签 | `#8892b0`（柔和蓝色），14px |
-| 温度值 | `#ccd6f6`（浅蓝色），42px 粗体 |
-| 位置 | `#64ffda`（青色强调色），16px |
+| 温度 | `#ccd6f6`（浅蓝色），42px bold |
+| 位置 | `#64ffda`（青色强调），16px |
 | 字体 | `system-ui` |
-| 所有文本 | 居中（`text-anchor="middle"` at x=150） |
+| 全部文本 | 居中（`text-anchor="middle"`，x=150） |
 
 ---
 
@@ -56,7 +56,7 @@ Dubai, UAE
 
 ## 输出路径
 
-| 文件 | 路径 |
+| File | Path |
 |------|------|
 | SVG 卡片 | `orchestration-workflow/weather.svg` |
 | Markdown 摘要 | `orchestration-workflow/output.md` |

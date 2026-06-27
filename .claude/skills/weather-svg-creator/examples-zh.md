@@ -1,6 +1,6 @@
 # Weather SVG Creator — 示例
 
-## 示例 1：摄氏度
+## 示例 1：Celsius
 
 ### 输入
 
@@ -9,7 +9,7 @@ Temperature: 26.2°C
 Unit: Celsius
 ```
 
-### SVG 输出 (`orchestration-workflow/weather.svg`)
+### SVG 输出（`orchestration-workflow/weather.svg`）
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160" width="300" height="160">
@@ -20,7 +20,7 @@ Unit: Celsius
 </svg>
 ```
 
-### Markdown 输出 (`orchestration-workflow/output.md`)
+### Markdown 输出（`orchestration-workflow/output.md`）
 
 ```markdown
 # Weather Result
@@ -40,7 +40,7 @@ Celsius
 
 ---
 
-## 示例 2：华氏度
+## 示例 2：Fahrenheit
 
 ### 输入
 
@@ -49,7 +49,7 @@ Temperature: 79.2°F
 Unit: Fahrenheit
 ```
 
-### SVG 输出 (`orchestration-workflow/weather.svg`)
+### SVG 输出（`orchestration-workflow/weather.svg`）
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 160" width="300" height="160">
@@ -60,7 +60,7 @@ Unit: Fahrenheit
 </svg>
 ```
 
-### Markdown 输出 (`orchestration-workflow/output.md`)
+### Markdown 输出（`orchestration-workflow/output.md`）
 
 ```markdown
 # Weather Result
