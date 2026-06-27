@@ -1,6 +1,6 @@
 # Agent Teams 实现
 
-![最后更新](https://img.shields.io/badge/Last_Updated-Mar_12%2C_2026-white?style=flat&labelColor=555)
+![Last Updated](https://img.shields.io/badge/Last_Updated-Mar_12%2C_2026-white?style=flat&labelColor=555)
 
 <table width="100%">
 <tr>
@@ -11,19 +11,19 @@
 
 ---
 
-<a href="#time-orchestration"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#time-orchestration"><img src="../!/tags/implemented-hd.svg" alt="Implemented"></a>
 
 <p align="center">
-  <img src="assets/impl-agent-teams.png" alt="Agent Teams 运行效果 — 使用 tmux 的分屏模式" width="100%">
+  <img src="assets/impl-agent-teams.png" alt="Agent Teams 实战 — tmux 分屏模式" width="100%">
 </p>
 
-Agent Teams 会生成**多个独立的 Claude Code 会话**，它们通过共享任务列表进行协调。与 subagent（单个会话内的隔离上下文分支）不同，每个团队成员都有自己的完整上下文窗口，自动加载 CLAUDE.md、MCP 服务器和 skills。
+Agent Teams 会生成**多个独立的 Claude Code 会话**，通过共享任务列表进行协调。与 subagent（单个会话内的隔离 context fork）不同，每个 teammate 拥有自己完整的 context window，并自动加载 CLAUDE.md、MCP server 和 skill。
 
 ---
 
 ## ![如何使用](../!/tags/how-to-use.svg)
 
-时间编排工作流完全由 agent team 构建。运行成品的方法如下：
+时间编排工作流完全由 agent team 构建。要运行成品：
 
 ```bash
 cd agent-teams
@@ -31,7 +31,7 @@ claude
 /time-orchestrator
 ```
 
-这会调用 **Command → Agent → Skill** 管道：agent 获取迪拜的当前时间，skill 将 SVG 时间卡片渲染到 `agent-teams/output/dubai-time.svg`。
+这会调用 **Command → Agent → Skill** 流水线：agent 获取迪拜的当前时间，skill 将 SVG 时间卡片渲染到 `agent-teams/output/dubai-time.svg`。
 
 ---
 
@@ -53,27 +53,27 @@ tmux new -s dev
 CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude
 ```
 
-### 3. 使用团队结构进行提示
+### 3. 使用 team 结构进行提示
 
 <a id="time-orchestration"></a>
 
-将以下提示粘贴到 Claude 中，以使用 agent teams 启动完整的时间编排工作流：
+将此 prompt 粘贴到 Claude 中，以使用 agent teams 引导完整的时间编排器工作流：
 
-主提示：**[agent-teams-prompt.md](../agent-teams/agent-teams-prompt.md)**
+主 prompt：**[agent-teams-prompt.md](../agent-teams/agent-teams-prompt.md)**
 
-### 团队协调流程
+### Team 协调流程
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                        主导者（你）                            │
-│                  "创建一个 agent team 来构建时间编排"          │
+│                         LEAD（你）                            │
+│        "创建一个 agent team 来构建时间编排"                   │
 └──────────────────────────┬───────────────────────────────────┘
-                           │ 生成团队（全部并行）
+                           │ 生成 team（全部并行）
               ┌────────────┼────────────┐
               ▼            ▼            ▼
    ┌────────────────┐ ┌──────────┐ ┌──────────────┐
    │ Command        │ │ Agent    │ │ Skill        │
-   │ 架构师         │ │ 工程师   │ │ 设计师       │
+   │ Architect      │ │ Engineer │ │ Designer     │
    │                │ │          │ │              │
    │ agent-teams/   │ │ agent-   │ │ agent-teams/ │
    │ .claude/       │ │ teams/   │ │ .claude/     │
@@ -85,12 +85,12 @@ CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 claude
            │               │              │
            ▼               ▼              ▼
    ┌──────────────────────────────────────────────────┐
-   │                 共享任务列表                       │
-   │  ☐ 约定数据契约：{time, tz, formatted}           │
-   │  ☐ Command 使用 Agent 工具（非 bash）             │
-   │  ☐ Agent 预加载 time-fetcher skill               │
-   │  ☐ Skill 从上下文读取时间（不重新获取）           │
-   │  ☐ 所有文件位于 agent-teams/.claude/ 内          │
+   │            共享任务列表                          │
+   │  ☐ 商定 data contract：{time, tz, formatted}    │
+   │  ☐ Command 使用 Agent 工具（非 bash）           │
+   │  ☐ Agent 预加载 time-fetcher skill              │
+   │  ☐ Skill 从 context 读取时间（不重新获取）      │
+   │  ☐ 所有文件位于 agent-teams/.claude/ 内         │
    └──────────────────────────────────────────────────┘
                        │
                        ▼

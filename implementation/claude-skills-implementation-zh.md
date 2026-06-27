@@ -11,15 +11,15 @@
 
 ---
 
-<a href="#weather-svg-creator"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#weather-svg-creator"><img src="../!/tags/implemented-hd.svg" alt="Implemented"></a>
 
-本仓库中实现了两个 skill，作为 **Command → Agent → Skill** 架构模式的一部分，演示了两种不同的 skill 调用模式：**agent skill**（预加载）和**skill**（直接调用）。
+本仓库实现了两个 skill，作为 **Command → Agent → Skill** 架构模式的一部分，展示了两种不同的 skill 调用模式：**agent skill**（预加载）和 **skill**（直接调用）。
 
 ---
 
-## Weather SVG Creator (Skill)
+## Weather SVG Creator（Skill）
 
-**文件**: [`.claude/skills/weather-svg-creator/SKILL.md`](../.claude/skills/weather-svg-creator/SKILL.md)
+**文件**：[`.claude/skills/weather-svg-creator/SKILL.md`](../.claude/skills/weather-svg-creator/SKILL.md)
 
 ```yaml
 ---
@@ -53,13 +53,13 @@ Write to `orchestration-workflow/output.md`...
 ...
 ```
 
-这是一个 **skill** — 由 command 通过 Skill 工具直接调用。它从对话上下文中接收温度数据，并创建 SVG 天气卡片和输出摘要。
+这是一个 **skill**——由 command 通过 Skill 工具直接调用。它从对话 context 接收温度数据，并创建 SVG 天气卡片和输出摘要。
 
 ---
 
-## Weather Fetcher (Agent Skill)
+## Weather Fetcher（Agent Skill）
 
-**文件**: [`.claude/skills/weather-fetcher/SKILL.md`](../.claude/skills/weather-fetcher/SKILL.md)
+**文件**：[`.claude/skills/weather-fetcher/SKILL.md`](../.claude/skills/weather-fetcher/SKILL.md)
 
 ```yaml
 ---
@@ -87,22 +87,22 @@ Fetch the current temperature for Dubai, UAE in the requested unit
 ...
 ```
 
-这是一个 **agent skill** — 在启动时通过 `skills:` frontmatter 字段预加载到 `weather-agent` 中。它不被直接调用；而是作为领域知识注入到 agent 的上下文中。注意 `user-invocable: false` 将其隐藏在 `/` 命令菜单中。
+这是一个 **agent skill**——在 `weather-agent` 启动时通过 `skills:` frontmatter 字段预加载到其 context 中。它不会被直接调用；相反，它作为注入到 agent context 中的领域知识。注意 `user-invocable: false` 将其从 `/` 命令菜单中隐藏。
 
 ---
 
 ## 两种 Skill 模式
 
-| 模式 | 调用方式 | 示例 | 关键区别 |
+| Pattern | 调用方式 | 示例 | 关键区别 |
 |---------|-----------|---------|----------------|
 | **Skill** | `Skill(skill: "name")` | `weather-svg-creator` | 通过 Skill 工具直接调用 |
-| **Agent Skill** | 通过 `skills:` 字段预加载 | `weather-fetcher` | 在启动时注入到 agent 上下文中 |
+| **Agent Skill** | 通过 `skills:` 字段预加载 | `weather-fetcher` | 在 agent 启动时注入到 context 中 |
 
 ---
 
-## ![使用方式](../!/tags/how-to-use.svg)
+## ![如何使用](../!/tags/how-to-use.svg)
 
-**Skill** — 通过斜杠命令直接调用：
+**Skill**——通过 slash command 直接调用：
 ```bash
 $ claude
 > /weather-svg-creator
@@ -112,9 +112,8 @@ $ claude
 
 ## ![如何实现](../!/tags/how-to-implement.svg)
 
-让 Claude 为你创建一个 — 它会在 `.claude/skills/my-skill/SKILL.md` 中生成带有 YAML frontmatter 和正文的 markdown 文件
+让 Claude 为你创建一个——它会在 `.claude/skills/my-skill/SKILL.md` 中生成包含 YAML frontmatter 和正文的 markdown 文件。
 
-```
 # My Skill
 
 Instructions for what the skill does.

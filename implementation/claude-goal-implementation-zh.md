@@ -1,6 +1,6 @@
 # Goal 实现
 
-![最后更新](https://img.shields.io/badge/Last_Updated-May_13%2C_2026-white?style=flat&labelColor=555)
+![Last Updated](https://img.shields.io/badge/Last_Updated-May_13%2C_2026-white?style=flat&labelColor=555)
 
 <table width="100%">
 <tr>
@@ -11,69 +11,69 @@
 
 ---
 
-<a href="#goal-tips-from-the-community"><img src="../!/tags/implemented-hd.svg" alt="已实现"></a>
+<a href="#goal-tips-from-the-community"><img src="../!/tags/implemented-hd.svg" alt="Implemented"></a>
 
-`/goal` 让你的 agent 跨轮次持续工作，直到某个条件被满足 — Claude Code、Codex 和 Hermes Agent 都支持它。社区正在汇聚一些与之配合良好的高杠杆提示技巧。
+`/goal` 让你的 agent 跨多个 turn 持续工作，直到某个条件满足——Claude Code、Codex 和 Hermes Agent 均支持。社区正在围绕几个高杠杆的提示技巧形成共识，这些技巧与 `/goal` 配合使用效果极佳。
 
 ---
 
-## 来自社区的 Goal 技巧
+## 来自社区的 Goal 使用技巧
 
-### 1. 让 agent 提出自己的目标
+### 1. 让 agent 为自己提议 goals
 
 <p align="center">
-  <img src="assets/impl-goal-claude.png" alt="Alex Finn 推文 — /goal 是 2026 年被最低估的 AI 功能" width="50%">
+  <img src="assets/impl-goal-claude.png" alt="Alex Finn tweet — /goal is the most underrated AI feature of 2026" width="50%">
 </p>
 
-> 官方消息。Claude Code 刚刚发布了 /goal
+> 来了。Claude Code 刚刚发布了 /goal
 >
-> 2026 年被最低估的 AI 功能
+> 2026 年最被低估的 AI 功能
 >
-> 现在 Claude Code、Codex 和 Hermes agent 都拥有它
+> 现在 Claude Code、Codex 和 Hermes agent 都有了
 >
-> 它让你的 agent 能够完成长时间运行的任务，有时甚至持续数天
+> 它能让你的 agent 完成长时间运行的任务，有时持续数天
 >
-> 每个人都应该立即运行这个 prompt：
+> 每个人都应该立刻运行这个 prompt：
 >
-> '基于你对我的了解、我的目标、抱负以及我们已经共同构建的成果，有哪些 3 个 /goal 我们现在可以运行，能够长时间执行并产生最佳结果？'
+> '基于你对我的了解——我的目标、志向，以及我们已经一起构建的东西——有哪些 3 个 /goals 可以现在就运行，会持续较长时间并带来最好结果？'
 >
 > 选择一个，然后让它为你构建一个 prompt
 >
-> 你会得到几个超级强大的 goal prompt 选项，让你选择的 agent 完成长时间运行的任务，带来令人惊叹的结果。
+> 你会得到几个超级强大的 goal prompt 选项，让你的 agent 完成那些能带来惊人成果的长时间任务。
 >
-> 今晚抽出 15 分钟来做这件事。之后再来感谢我。
+> 今晚抽出 15 分钟来试试。你会感谢我的。
 
-**来源：** [Alex Finn (@AlexFinn) 在 X 上](https://x.com/AlexFinn/status/2053976411296452887)
+**来源：**[Alex Finn (@AlexFinn) on X](https://x.com/AlexFinn/status/2053976411296452887)
 
 ---
 
 ### 2. 让 agent 为你起草 /goal prompt
 
 <p align="center">
-  <img src="assets/impl-goal-codex.png" alt="Meta Alchemist 推文 — Codex 的 /goal 技巧" width="50%">
+  <img src="assets/impl-goal-codex.png" alt="Meta Alchemist tweet — /goal trick for Codex" width="50%">
 </p>
 
 > 想知道 Codex 最好的 /goal 技巧吗？
 >
-> 直接告诉你的 Codex：
+> 只需要告诉你的 Codex：
 >
-> "阅读此 session 和 repo，深入分析我们要在此实现的确切意图和目标，然后为我写出 /goal prompt。
+> "阅读这个 session 和仓库，深度分析我们想要实现的确切意图和 goals，然后为我写一个 /goal prompt。
 >
-> 确保深入挖掘历史记录和文档，做到 100% 清晰"
+> 确保深入挖掘历史记录和我们拥有的文档，做到 100% 明确"
 >
-> 你也可以添加：
+> 你还可以加上：
 >
-> "如果对某些部分不确定，或者想问我几个问题来进一步明确某些目标，请尽管问"
+> "如果你对某些部分不确定，或者想问我几个问题以进一步明确某些 goals，尽管问"
 >
-> 然后直接复制粘贴 Codex 给出的内容，将开头部分改为 /goal
+> 然后把 Codex 输出的内容复制粘贴，将开头部分改为 /goal
 >
-> 它就会在该 session / repo 中持续不断地完成你原本想做的事情，直到全部完成。
+> 它就会不间断地完成你在这个 session/仓库中想要做的所有事情，直到最终完成。
 
-**来源：** [Meta Alchemist (@meta_alchemist) 在 X 上](https://x.com/meta_alchemist/status/2054214497443995694)
+**来源：**[Meta Alchemist (@meta_alchemist) on X](https://x.com/meta_alchemist/status/2054214497443995694)
 
 ---
 
-## ![使用方法](../!/tags/how-to-use.svg)
+## ![如何使用](../!/tags/how-to-use.svg)
 
 ```bash
 $ claude
@@ -81,6 +81,6 @@ $ claude
 > /goal clear
 ```
 
-`/goal <condition>` 让 Claude 跨轮次持续工作，直到一个由 Haiku 评估的条件成立。它与 `/loop`（时间驱动）和 auto mode（按工具驱动）是互补的。需要 Claude Code v2.1.139+。
+`/goal <condition>` 让 Claude 跨 turn 持续工作，直到一个由 Haiku 评估的条件成立。它与 `/loop`（时间驱动）和 auto 模式（per-tool）互补。需要 Claude Code v2.1.139+。
 
-查看[官方文档](https://code.claude.com/docs/en/goal)了解完整行为。
+完整行为请参见[官方文档](https://code.claude.com/docs/en/goal)。
