@@ -205,3 +205,177 @@ No drift detected — frontmatter fields (15) and bundled skills (6) are fully s
 | 1 | HIGH | New Skill | Add `run` to official bundled skills table — launch and drive the project's app to see a change working (requires v2.1.145) | ✅ COMPLETE (added as row 7, count updated 6→9) |
 | 2 | HIGH | New Skill | Add `verify` to official bundled skills table — build and run the app to confirm a change works without falling back to tests/type checks (requires v2.1.145) | ✅ COMPLETE (added as row 8, count updated 6→9) |
 | 3 | HIGH | New Skill | Add `run-skill-generator` to official bundled skills table — teaches `/run` and `/verify` how to build/launch the project, records a per-project recipe at `.claude/skills/run-<name>/` (requires v2.1.145) | ✅ COMPLETE (added as row 9, count updated 6→9) |
+
+---
+
+## [2026-05-25 04:25 PM PKT] Claude Code v2.1.150
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | Renamed Skill | Rename `simplify` (row 1) to `code-review`; update description — `/simplify` was renamed to `/code-review` in v2.1.147, now reviews the current diff for correctness bugs at a chosen effort level (`--comment` posts findings as inline PR comments) | ✅ COMPLETE (renamed row 1 to `code-review` and rewrote description; bundled skill count stays 9) |
+| 2 | LOW | Skill Naming | Agent flagged `fewer-permission-prompts` (report row 6) vs changelog name `less-permission-prompts` (v2.1.111) — verify which is canonical | ❌ INVALID (live `/` skill menu in this session confirms `fewer-permission-prompts` is the shipping name; report row 6 is correct, no change) |
+
+---
+
+## [2026-06-01 12:01 AM PKT] Claude Code v2.1.158
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | New Field | Add `disallowed-tools` to frontmatter table — tools removed from Claude's available pool while the skill is active (accepts space/comma-separated string or YAML list; clears on next message). Introduced v2.1.152, reaffirmed v2.1.157. Update count 15→16 | ✅ COMPLETE (added `disallowed-tools` row after `allowed-tools`, count updated 15→16) |
+| 2 | HIGH | New Skill | Add `simplify` to official bundled skills table — cleanup-only review (reuse, simplification, efficiency, abstraction level), four review agents in parallel; from v2.1.154 it does NOT hunt for correctness bugs (use `/code-review` for that). Update count 9→10 | ✅ COMPLETE (added as row 10, count updated 9→10) |
+
+---
+
+## [2026-06-01 10:11 AM PKT] Claude Code v2.1.159
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-02 10:03 AM PKT] Claude Code v2.1.160
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-03 10:03 AM PKT] Claude Code v2.1.161
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-04 10:03 AM PKT] Claude Code v2.1.162
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-05 10:03 AM PKT] Claude Code v2.1.163
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-06 10:08 AM PKT] Claude Code v2.1.167
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-07 10:04 AM PKT] Claude Code v2.1.168
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-08 10:04 AM PKT] Claude Code v2.1.168
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-09 10:04 AM PKT] Claude Code v2.1.169
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-10 10:04 AM PKT] Claude Code v2.1.170
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-11 10:08 AM PKT] Claude Code v2.1.172
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-12 10:07 AM PKT] Claude Code v2.1.175
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-13 10:07 AM PKT] Claude Code v2.1.176
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-14 10:07 AM PKT] Claude Code v2.1.176
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-15 10:08 AM PKT] Claude Code v2.1.176
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-16 10:08 AM PKT] Claude Code v2.1.178
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-17 10:07 AM PKT] Claude Code v2.1.179
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-18 10:05 AM PKT] Claude Code v2.1.181
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-19 10:06 AM PKT] Claude Code v2.1.183
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-20 10:06 AM PKT] Claude Code v2.1.183
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-21 10:06 AM PKT] Claude Code v2.1.185
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-22 10:06 AM PKT] Claude Code v2.1.185
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-23 10:06 AM PKT] Claude Code v2.1.186
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-24 10:06 AM PKT] Claude Code v2.1.187
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-25 10:06 AM PKT] Claude Code v2.1.191
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.
+
+---
+
+## [2026-06-26 10:06 AM PKT] Claude Code v2.1.193
+
+No drift detected — frontmatter fields (16) and bundled skills (10) are fully synchronized with official docs.

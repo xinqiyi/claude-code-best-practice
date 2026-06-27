@@ -237,3 +237,187 @@ No drift detected on the two tracked dimensions — all 16 frontmatter fields an
 ## [2026-05-21 12:05 AM PKT] Claude Code v2.1.145
 
 No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-05-25 04:26 PM PKT] Claude Code v2.1.150
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-01 12:02 AM PKT] Claude Code v2.1.158
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-01 11:38 AM PKT] Claude Code v2.1.159
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-02 11:37 AM PKT] Claude Code v2.1.160
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-03 11:37 AM PKT] Claude Code v2.1.161
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-04 11:37 AM PKT] Claude Code v2.1.162
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-05 11:37 AM PKT] Claude Code v2.1.165
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-06 11:38 AM PKT] Claude Code v2.1.167
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-07 11:34 AM PKT] Claude Code v2.1.168
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-08 11:34 AM PKT] Claude Code v2.1.168
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-09 11:34 AM PKT] Claude Code v2.1.169
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-10 11:35 AM PKT] Claude Code v2.1.170
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-11 11:34 AM PKT] Claude Code v2.1.173
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-12 11:34 AM PKT] Claude Code v2.1.175
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-13 11:34 AM PKT] Claude Code v2.1.176
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-14 11:35 AM PKT] Claude Code v2.1.176
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-15 11:35 AM PKT] Claude Code v2.1.176
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-16 11:35 AM PKT] Claude Code v2.1.178
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-17 11:35 AM PKT] Claude Code v2.1.179
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-18 11:35 AM PKT] Claude Code v2.1.181
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+---
+
+## [2026-06-19 11:35 AM PKT] Claude Code v2.1.183
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item:** `prompt` appears in the `--agents` CLI JSON field enumeration in the official docs (alongside `description`, `tools`, `color`, etc.) but is absent from the dedicated "Supported frontmatter fields" table. Since our report tracks file-based frontmatter, this is not a drift finding — but if the docs promote `prompt` to the main frontmatter table, the report will need updating.
+
+---
+
+## [2026-06-20 11:34 AM PKT] Claude Code v2.1.183
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item (recurring):** `prompt` remains in the `--agents` CLI JSON field enumeration in the official docs but is absent from the "Supported frontmatter fields" table. Still not a drift finding for file-based frontmatter tracking.
+
+---
+
+## [2026-06-21 11:35 AM PKT] Claude Code v2.1.185
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item (recurring):** `prompt` remains in the `--agents` CLI JSON field enumeration in the official docs but is absent from the "Supported frontmatter fields" table. Still not a drift finding for file-based frontmatter tracking.
+
+---
+
+## [2026-06-22 11:34 AM PKT] Claude Code v2.1.185
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item (recurring):** `prompt` remains in the `--agents` CLI JSON field enumeration in the official docs but is absent from the "Supported frontmatter fields" table. Still not a drift finding for file-based frontmatter tracking.
+
+---
+
+## [2026-06-23 11:35 AM PKT] Claude Code v2.1.186
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item (recurring):** `prompt` remains in the `--agents` CLI JSON field enumeration in the official docs but is absent from the "Supported frontmatter fields" table. Still not a drift finding for file-based frontmatter tracking.
+
+---
+
+## [2026-06-24 11:34 AM PKT] Claude Code v2.1.187
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item (recurring):** `prompt` remains in the `--agents` CLI JSON field enumeration in the official docs but is absent from the "Supported frontmatter fields" table. Still not a drift finding for file-based frontmatter tracking.
+
+---
+
+## [2026-06-25 11:34 AM PKT] Claude Code v2.1.191
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item (recurring):** `prompt` remains in the `--agents` CLI JSON field enumeration in the official docs but is absent from the "Supported frontmatter fields" table. Still not a drift finding for file-based frontmatter tracking.
+
+---
+
+## [2026-06-26 11:35 AM PKT] Claude Code v2.1.193
+
+No drift detected on the two tracked dimensions — all 16 frontmatter fields and 5 built-in agents match.
+
+**Watch item (recurring):** `prompt` remains in the `--agents` CLI JSON field enumeration in the official docs but is absent from the "Supported frontmatter fields" table. Still not a drift finding for file-based frontmatter tracking.

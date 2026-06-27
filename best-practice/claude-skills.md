@@ -1,6 +1,6 @@
 # Skills Best Practice
 
-![Last Updated](https://img.shields.io/badge/Last_Updated-May%2021%2C%202026%2012%3A04%20AM%20PKT-white?style=flat&labelColor=555) ![Version](https://img.shields.io/badge/Claude_Code-v2.1.145-blue?style=flat&labelColor=555)<br>
+![Last Updated](https://img.shields.io/badge/Last_Updated-Jun%2026%2C%202026%2010%3A06%20AM%20PKT-white?style=flat&labelColor=555) ![Version](https://img.shields.io/badge/Claude_Code-v2.1.193-blue?style=flat&labelColor=555)<br>
 [![Implemented](https://img.shields.io/badge/Implemented-2ea44f?style=flat)](../implementation/claude-skills-implementation.md)
 
 Claude Code skills — frontmatter fields and official bundled skills.
@@ -14,7 +14,7 @@ Claude Code skills — frontmatter fields and official bundled skills.
 
 ---
 
-## Frontmatter Fields (15)
+## Frontmatter Fields (16)
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -26,6 +26,7 @@ Claude Code skills — frontmatter fields and official bundled skills.
 | `disable-model-invocation` | boolean | No | Set `true` to prevent Claude from automatically invoking this skill |
 | `user-invocable` | boolean | No | Set `false` to hide from the `/` menu — skill becomes background knowledge only, intended for agent preloading |
 | `allowed-tools` | string | No | Tools allowed without permission prompts when this skill is active |
+| `disallowed-tools` | string/list | No | Tools removed from Claude's available pool while the skill is active (e.g. block `AskUserQuestion` for a background loop). Accepts a space/comma-separated string or YAML list — the restriction clears on the next message |
 | `model` | string | No | Model to use when this skill runs (e.g., `haiku`, `sonnet`, `opus`) |
 | `effort` | string | No | Override the model effort level when invoked (`low`, `medium`, `high`, `xhigh`, `max`) |
 | `context` | string | No | Set to `fork` to run the skill in an isolated subagent context |
@@ -36,11 +37,11 @@ Claude Code skills — frontmatter fields and official bundled skills.
 
 ---
 
-## ![Official](../!/tags/official.svg) **(9)**
+## ![Official](../!/tags/official.svg) **(10)**
 
 | # | Skill | Description |
 |---|-------|-------------|
-| 1 | `simplify` | Review changed code for reuse, quality, and efficiency — refactors to eliminate duplication |
+| 1 | `code-review` | Review the current diff for correctness bugs at a chosen effort level (low/medium: fewer, high-confidence findings; high→max: broader coverage) — `--comment` posts findings as inline PR comments |
 | 2 | `batch` | Run commands across multiple files in bulk |
 | 3 | `debug` | Debug failing commands or code issues |
 | 4 | `loop` | Run a prompt or slash command on a recurring interval (up to 3 days) |
@@ -49,6 +50,7 @@ Claude Code skills — frontmatter fields and official bundled skills.
 | 7 | `run` | Launch and drive the project's app to see a change working in the real app (not just tests). Requires v2.1.145 |
 | 8 | `verify` | Build and run the app to confirm a code change does what it should, without falling back to tests or type checks. Requires v2.1.145 |
 | 9 | `run-skill-generator` | Teaches `/run` and `/verify` how to build and launch the project — records a per-project launch recipe at `.claude/skills/run-<name>/`. Requires v2.1.145 |
+| 10 | `simplify` | Review changed code for cleanup opportunities (reuse, simplification, efficiency, abstraction level), four review agents in parallel. From v2.1.154 it does **not** hunt for correctness bugs — use `/code-review` for that |
 
 See also: [Official Skills Repository](https://github.com/anthropics/skills/tree/main/skills) for community-maintained installable skills.
 

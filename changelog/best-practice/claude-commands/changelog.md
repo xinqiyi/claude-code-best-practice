@@ -312,3 +312,222 @@ No priority action items — report is fully in sync with official documentation
 | 2 | MED | New Alias | Add `/share` alias to `/feedback` and broaden description to "Submit feedback, report a bug, or share your conversation. Aliases: `/bug`, `/share`" | ✅ COMPLETE (updated description at #29 in Debug tag) |
 | 3 | LOW | Changed Value | Add `xhigh` to the `effort` frontmatter field's options list (`low`, `medium`, `high`, `xhigh`, `max`) | ✅ COMPLETE (added `xhigh` to effort field row; value-list sync, not a field add/remove) |
 | 4 | LOW | Scope Decision | 9 bundled skills (`/batch`, `/claude-api`, `/debug`, `/fewer-permission-prompts`, `/loop`, `/run`, `/run-skill-generator`, `/simplify`, `/verify`) in upstream unified table excluded per report scope | ❌ INVALID (recurring from v2.1.107/119/139 — report intentionally scoped to built-in commands only) |
+
+---
+
+## [2026-05-25 04:25 PM PKT] Claude Code v2.1.150
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | LOW | Scope Decision | 9 bundled skills (`/batch`, `/claude-api`, `/code-review`, `/debug`, `/fewer-permission-prompts`, `/loop`, `/run`, `/run-skill-generator`, `/verify`) in upstream unified table excluded per report scope; `/simplify` renamed → `/code-review` at v2.1.147 (still a bundled Skill, stays excluded) | ❌ INVALID (recurring from v2.1.107/119/139/145 — report intentionally scoped to built-in commands only) |
+
+_No tracked drift: frontmatter fields 15/15 match official docs, built-in commands 80/80 match. Version badge bumped v2.1.145 → v2.1.150._
+
+---
+
+## [2026-06-01 12:03 AM PKT] Claude Code v2.1.158
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | New Field | Add `disallowed-tools` to frontmatter table — tools removed from Claude's available pool while the skill/command is active; clears on next message (count 15 → 16) | ✅ COMPLETE (added after `allowed-tools`, heading updated 15 → 16) |
+| 2 | HIGH | New Command | Add `/reload-skills` to Extensions tag — re-scan skill/command directories so on-disk changes apply without restart; reports counts added/removed (count 80 → 81) | ✅ COMPLETE (added as #44 after `/reload-plugins`, downstream rows renumbered) |
+| 3 | HIGH | New Command | Add `/workflows` to Session tag — open the workflow progress view to watch, pause, resume, or save running and completed workflows (count 81 → 82) | ✅ COMPLETE (added as #82 at end of Session group, count heading updated → 82) |
+
+---
+
+## [2026-06-01 11:08 AM PKT] Claude Code v2.1.159
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 82 built-in commands).
+
+---
+
+## [2026-06-02 11:07 AM PKT] Claude Code v2.1.160
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | Changed Description | Update `/effort` — add `ultracode` level (combines `xhigh` reasoning with automatic workflow orchestration; session-only); update signature from `auto` to `ultracode` as final listed level option (v2.1.160 renamed `workflow` → `ultracode`) | ✅ COMPLETE (updated signature and description at #47 in Model tag) |
+
+---
+
+## [2026-06-03 11:07 AM PKT] Claude Code v2.1.161
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 82 built-in commands).
+
+---
+
+## [2026-06-04 11:07 AM PKT] Claude Code v2.1.162
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | New Command | Add `/fork <directive>` to Session tag — Spawn a forked subagent that inherits the full conversation and works on the directive while you keep going (standalone since v2.1.161; previously alias of `/branch`) | ✅ COMPLETE (added as #76 in Session tag; alias reference removed from `/branch` row; downstream rows 76-82 renumbered to 77-83; count updated 82 → 83) |
+| 2 | MED | Changed Description | Update `/terminal-setup` — replace "Windsurf" with "Devin Desktop" (renamed in v2.1.162) | ✅ COMPLETE (updated description at #17 in Config tag) |
+
+---
+
+## [2026-06-05 11:07 AM PKT] Claude Code v2.1.165
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 83 built-in commands).
+
+---
+
+## [2026-06-06 11:05 AM PKT] Claude Code v2.1.167
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 83 built-in commands).
+
+---
+
+## [2026-06-07 11:04 AM PKT] Claude Code v2.1.168
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 83 built-in commands).
+
+---
+
+## [2026-06-08 11:05 AM PKT] Claude Code v2.1.168
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 83 built-in commands).
+
+---
+
+## [2026-06-09 11:04 AM PKT] Claude Code v2.1.169
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | New Command | Add `/cd [path]` to Session tag — Move the session to a new working directory without breaking the prompt cache | ✅ COMPLETE (added as #73 in Session tag; downstream rows 73–83 renumbered to 74–84; count updated 83 → 84) |
+
+---
+
+## [2026-06-10 11:05 AM PKT] Claude Code v2.1.170
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | New Command | Add `/advisor [model\|off]` to Model tag — Enable or disable the advisor tool which consults a second model for guidance at key moments | ✅ COMPLETE (added as #47 in Model tag; downstream rows 47–84 renumbered 48–85; count updated 84 → 85) |
+
+---
+
+## [2026-06-11 11:09 AM PKT] Claude Code v2.1.173
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | MED | Changed Description | Update `/review` — official docs updated cross-reference from `/ultrareview` to `/code-review ultra` | ✅ COMPLETE (updated description at #57 in Project tag) |
+| 2 | MED | Changed Description | Update `/ultrareview` — official docs now note preferred invocation is `/code-review ultra`; `/ultrareview` remains as an alias | ✅ COMPLETE (updated description at #60 in Project tag) |
+
+---
+
+## [2026-06-12 11:08 AM PKT] Claude Code v2.1.175
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | MED | Changed Argument | Update `/clear` — add `[name]` optional arg to label the previous conversation for retrieval via `/resume` | ✅ COMPLETE (updated signature and description at #75 in Session tag) |
+| 2 | MED | Changed Argument | Update `/context` — add `[all]` optional arg to expand the full context breakdown | ✅ COMPLETE (updated signature and description at #21 in Context tag) |
+| 3 | LOW | Changed Argument | Update `/cd` — change `[path]` (optional) to `<path>` (required) per official docs | ✅ COMPLETE (updated signature at #74 in Session tag) |
+| 4 | LOW | Changed Description | Update `/color` — add "run without an argument to pick a random color" per official docs | ✅ COMPLETE (appended random-color note at #6 in Config tag) |
+| 5 | LOW | Changed Description | Update `/remote-env` — reworded from "Configure the default remote environment for web sessions started with `--remote`" to "Choose the default environment for cloud agents" | ✅ COMPLETE (updated description at #67 in Remote tag) |
+
+---
+
+## [2026-06-13 11:07 AM PKT] Claude Code v2.1.176
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | LOW | Scope Decision | 11 bundled skills/workflows (`/batch`, `/claude-api`, `/code-review`, `/debug`, `/deep-research`, `/fewer-permission-prompts`, `/loop`, `/run`, `/run-skill-generator`, `/simplify`, `/verify`) listed in upstream unified table but excluded per report scope; `/deep-research` (Workflow) appears for first time in findings | ❌ INVALID (recurring from v2.1.107/119/139/145/150 — report intentionally scoped to built-in commands only; `/deep-research` is a bundled Workflow and stays excluded) |
+
+---
+
+## [2026-06-14 11:06 AM PKT] Claude Code v2.1.176
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-15 11:09 AM PKT] Claude Code v2.1.176
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-16 11:08 AM PKT] Claude Code v2.1.178
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-17 11:08 AM PKT] Claude Code v2.1.179
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-18 11:06 AM PKT] Claude Code v2.1.181
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-19 11:13 AM PKT] Claude Code v2.1.183
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | HIGH | Changed Argument | Update `/config` — add `[key=value ...]` argument hint; expand description to cover key=value syntax (v2.1.181), non-interactive and Remote Control support, and `/config help` shorthand key listing (v2.1.183) | ✅ COMPLETE (updated signature and description at #7 in Config tag) |
+| 2 | MED | Changed Argument | Update `/mcp` — add `[reconnect <server>\|enable\|disable [<server>\|all]]` argument syntax and expand description with subcommand details | ✅ COMPLETE (updated signature and description at #41 in Extensions tag) |
+| 3 | MED | Changed Argument | Update `/plugin` — add `[subcommand]` argument hint; expand description with subcommand list | ✅ COMPLETE (updated signature and description at #42 in Extensions tag) |
+| 4 | MED | Changed Argument | Update `/reload-plugins` — add `[--force]` argument hint and description of prompt-cache invalidation warning | ✅ COMPLETE (updated signature and description at #43 in Extensions tag) |
+| 5 | MED | Changed Argument | Update `/review` — add `[PR]` optional argument hint per official docs | ✅ COMPLETE (updated signature at #57 in Project tag) |
+| 6 | MED | Changed Description | Update `/focus` — change "a summary of tool calls" → "a one-line tool-call summary with edit diffstats"; add "The selection persists across sessions; set `viewMode` in settings to override it."; remove "Useful for reducing visual noise during long sessions." | ✅ COMPLETE (updated description at #8 in Config tag) |
+| 7 | MED | Changed Description | Update `/goal` — add "With no argument, shows the current or most recently achieved goal."; expand clear aliases to include `stop`, `off`, `reset`, `none`, `cancel` | ✅ COMPLETE (updated description at #79 in Session tag) |
+| 8 | MED | Changed Description | Update `/skills` — add "Press `Space` to hide a skill from Claude or the `/` menu, then `Enter` to save" | ✅ COMPLETE (updated description at #45 in Extensions tag) |
+| 9 | MED | Changed Description | Update `/background` — add "Pass a prompt to send one more instruction before detaching. Monitor the session with `claude agents`." | ✅ COMPLETE (updated description at #71 in Session tag) |
+| 10 | MED | Changed Description | Update `/tasks` — reword from "List and manage background tasks. Alias: /bashes" to "View and manage everything running in the background. Also available as /bashes" | ✅ COMPLETE (updated description at #34 in Debug tag) |
+| 11 | LOW | Changed Description | Update `/stop` — add "Only available while attached to a background session;" and "To detach without stopping, use `/exit` or press `←`" | ✅ COMPLETE (updated description at #84 in Session tag) |
+| 12 | LOW | Changed Description | Update `/exit` — add "In an attached background session, this detaches and the session keeps running." | ✅ COMPLETE (updated description at #77 in Session tag) |
+| 13 | LOW | Changed Description | Update `/resume` — add "As of v2.1.144, background sessions appear in the picker marked with `bg`." | ✅ COMPLETE (updated description at #82 in Session tag) |
+| 14 | LOW | Changed Description | Update `/ultrareview` — add "Includes 3 free runs on Pro and Max, then requires usage credits"; trim "Produces a structured review with prioritized findings." | ✅ COMPLETE (updated description at #60 in Project tag) |
+| 15 | LOW | Changed Description | Update `/usage` — add "On a Pro, Max, Team, or Enterprise plan, includes a breakdown of usage by skill, subagent, plugin, and MCP server." | ✅ COMPLETE (updated description at #26 in Context tag) |
+| 16 | LOW | Changed Description | Update `/radio` — add "Prints the stream URL when no browser is available. Not available on Bedrock, Vertex, or Foundry" | ✅ COMPLETE (updated description at #12 in Config tag) |
+| 17 | LOW | Changed Description | Update `/tui` — reword description; add "With no argument, prints the active renderer" | ✅ COMPLETE (updated description at #19 in Config tag) |
+| 18 | LOW | Changed Description | Update `/team-onboarding` — expand with output format detail and Pro/Max plan share link feature | ✅ COMPLETE (updated description at #59 in Project tag) |
+
+---
+
+## [2026-06-20 11:05 AM PKT] Claude Code v2.1.183
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-21 11:05 AM PKT] Claude Code v2.1.185
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-22 11:07 AM PKT] Claude Code v2.1.185
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-23 11:06 AM PKT] Claude Code v2.1.186
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-24 11:06 AM PKT] Claude Code v2.1.187
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
+
+---
+
+## [2026-06-25 11:07 AM PKT] Claude Code v2.1.191
+
+| # | Priority | Type | Action | Status |
+|---|----------|------|--------|--------|
+| 1 | MED | Changed Description | Update `/model [model]` — docs now emphasize saving as default for new sessions; add `s` key for session-only switch | ✅ COMPLETE (updated description to match official docs) |
+| 2 | MED | Changed Description | Update `/review [PR]` — docs now reference `/code-review` engine and note that no-argument invocation lists open PRs | ✅ COMPLETE (updated description to match official docs) |
+| 3 | MED | Changed Description | Update `/install-github-app` — expanded to "Install the Claude GitHub App for a repository, with an optional step to set up GitHub Actions workflows and secrets" | ✅ COMPLETE (updated description to match official docs) |
+
+---
+
+## [2026-06-26 11:06 AM PKT] Claude Code v2.1.193
+
+No priority action items — report is fully in sync with official documentation (16 frontmatter fields, 85 built-in commands).
