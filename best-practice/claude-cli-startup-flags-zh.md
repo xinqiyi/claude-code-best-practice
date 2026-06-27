@@ -1,8 +1,8 @@
 # CLI 启动参数最佳实践
 
-![最后更新](https://img.shields.io/badge/Last_Updated-Mar%2002%2C%202026-white?style=flat&labelColor=555)
+![Last Updated](https://img.shields.io/badge/Last_Updated-Mar%2002%2C%202026-white?style=flat&labelColor=555)
 
-从终端启动 Claude Code 时使用的 Claude Code 启动参数、顶级子命令和启动环境变量参考。
+Claude Code 从终端启动时的启动参数、顶级子命令和启动环境变量参考。
 
 <table width="100%">
 <tr>
@@ -15,217 +15,217 @@
 
 ## 目录
 
-1. [会话管理](#session-management)
-2. [模型与配置](#model--configuration)
-3. [权限与安全](#permissions--security)
-4. [输出与格式](#output--format)
-5. [系统提示词](#system-prompt)
-6. [Agent 与 Subagent](#agent--subagent)
-7. [MCP 与插件](#mcp--plugins)
-8. [目录与工作区](#directory--workspace)
-9. [预算与限制](#budget--limits)
-10. [集成](#integration)
-11. [初始化与维护](#initialization--maintenance)
-12. [调试与诊断](#debug--diagnostics)
-13. [设置覆盖](#settings-override)
-14. [版本与帮助](#version--help)
-15. [子命令](#subcommands)
-16. [环境变量](#environment-variables)
+1. [Session Management](#session-management)
+2. [Model & Configuration](#model--configuration)
+3. [Permissions & Security](#permissions--security)
+4. [Output & Format](#output--format)
+5. [System Prompt](#system-prompt)
+6. [Agent & Subagent](#agent--subagent)
+7. [MCP & Plugins](#mcp--plugins)
+8. [Directory & Workspace](#directory--workspace)
+9. [Budget & Limits](#budget--limits)
+10. [Integration](#integration)
+11. [Initialization & Maintenance](#initialization--maintenance)
+12. [Debug & Diagnostics](#debug--diagnostics)
+13. [Settings Override](#settings-override)
+14. [Version & Help](#version--help)
+15. [Subcommands](#subcommands)
+16. [Environment Variables](#environment-variables)
 
 ---
 
-## 会话管理
+## Session Management
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
 | `--continue` | `-c` | 继续当前目录中最近的对话 |
-| `--resume` | `-r` | 按 ID 或名称恢复特定会话，或显示交互式选择器 |
-| `--from-pr <NUMBER\|URL>` | | 恢复链接到特定 GitHub PR 的会话 |
-| `--fork-session` | | 在恢复时为会话创建新 ID（与 `--resume` 或 `--continue` 配合使用） |
-| `--session-id <UUID>` | | 使用特定的会话 ID（必须是有效的 UUID） |
-| `--no-session-persistence` | | 禁用会话持久化（仅 print 模式） |
-| `--remote` | | 在 claude.ai 上创建新的 web 会话 |
-| `--teleport` | | 在本地终端中恢复 web 会话 |
+| `--resume` | `-r` | 通过 ID 或名称恢复特定 session，或显示交互式选择器 |
+| `--from-pr <NUMBER\|URL>` | | 恢复链接到特定 GitHub PR 的 session |
+| `--fork-session` | | 恢复时创建新的 session ID（与 `--resume` 或 `--continue` 配合使用） |
+| `--session-id <UUID>` | | 使用特定的 session ID（必须是有效的 UUID） |
+| `--no-session-persistence` | | 禁用 session 持久化（仅 print mode） |
+| `--remote` | | 在 claude.ai 上创建新的 web session |
+| `--teleport` | | 在本地终端中恢复 web session |
 
 ---
 
-## 模型与配置
+## Model & Configuration
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--model <NAME>` | | 使用别名（`sonnet`、`opus`、`haiku`）或完整模型 ID 设置模型 |
-| `--fallback-model <NAME>` | | 默认模型过载时自动回退的模型（仅 print 模式） |
-| `--betas <LIST>` | | 包含在 API 请求中的 beta 标头（仅 API 密钥用户） |
+| `--model <NAME>` | | 使用别名（`sonnet`、`opus`、`haiku`）或完整 model ID 设置模型 |
+| `--fallback-model <NAME>` | | 当默认模型过载时自动 fallback 的模型（仅 print mode） |
+| `--betas <LIST>` | | 包含在 API 请求中的 Beta header（仅限 API key 用户） |
 
 ---
 
-## 权限与安全
+## Permissions & Security
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--dangerously-skip-permissions` | | 跳过所有权限提示。请极其谨慎使用 |
-| `--allow-dangerously-skip-permissions` | | 启用权限绕过作为选项（但不激活它） |
-| `--permission-mode <MODE>` | | 以指定的权限模式启动：`default`、`plan`、`acceptEdits`、`bypassPermissions` |
-| `--allowedTools <TOOLS>` | | 无需提示即可执行的 tools（权限规则语法） |
-| `--disallowedTools <TOOLS>` | | 从模型上下文中完全移除的 tools |
-| `--tools <TOOLS>` | | 限制 Claude 可以使用的内置 tools（使用 `""` 禁用所有内置 tools） |
-| `--permission-prompt-tool <TOOL>` | | 指定用于在非交互模式下处理权限提示的 MCP tool |
+| `--dangerously-skip-permissions` | | 跳过所有权限提示。请极其谨慎地使用 |
+| `--allow-dangerously-skip-permissions` | | 允许权限绕过作为选项而不激活它 |
+| `--permission-mode <MODE>` | | 以指定的 permission mode 启动：`default`、`plan`、`acceptEdits`、`bypassPermissions` |
+| `--allowedTools <TOOLS>` | | 无需提示即可执行的工具（permission rule 语法） |
+| `--disallowedTools <TOOLS>` | | 从模型 context 中完全移除的工具 |
+| `--tools <TOOLS>` | | 限制 Claude 可以使用的内置工具（使用 `""` 禁用所有） |
+| `--permission-prompt-tool <TOOL>` | | 指定 MCP 工具在非交互模式下处理权限提示 |
 
 ---
 
-## 输出与格式
+## Output & Format
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--print` | `-p` | 打印响应，不进入交互模式（headless/SDK 模式） |
+| `--print` | `-p` | 打印响应而不进入交互模式（headless/SDK 模式） |
 | `--output-format <FORMAT>` | | 输出格式：`text`、`json`、`stream-json` |
 | `--input-format <FORMAT>` | | 输入格式：`text`、`stream-json` |
-| `--json-schema <SCHEMA>` | | 获取符合 JSON schema 的经过验证的 JSON 输出（仅 print 模式） |
-| `--include-partial-messages` | | 包含部分流式事件（需要 `--print` 和 `--output-format=stream-json`） |
-| `--verbose` | | 启用详细日志输出，显示逐轮完整信息 |
+| `--json-schema <SCHEMA>` | | 获取匹配 schema 的验证 JSON（仅 print mode） |
+| `--include-partial-messages` | | 包含部分 streaming 事件（需要 `--print` 和 `--output-format=stream-json`） |
+| `--verbose` | | 启用详细日志记录，带有完整的逐轮输出 |
 
 ---
 
-## 系统提示词
+## System Prompt
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--system-prompt <TEXT>` | | 用自定义文本替换整个系统提示词 |
-| `--system-prompt-file <PATH>` | | 从文件加载系统提示词，替换默认值（仅 print 模式） |
-| `--append-system-prompt <TEXT>` | | 将自定义文本追加到默认系统提示词之后 |
-| `--append-system-prompt-file <PATH>` | | 将文件内容追加到默认系统提示词之后（仅 print 模式） |
+| `--system-prompt <TEXT>` | | 用自定义文本替换整个 system prompt |
+| `--system-prompt-file <PATH>` | | 从文件加载 system prompt，替换默认值（仅 print mode） |
+| `--append-system-prompt <TEXT>` | | 将自定义文本追加到默认 system prompt |
+| `--append-system-prompt-file <PATH>` | | 将文件内容追加到默认 prompt（仅 print mode） |
 
 ---
 
-## Agent 与 Subagent
+## Agent & Subagent
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--agent <NAME>` | | 为当前会话指定一个 agent |
+| `--agent <NAME>` | | 为当前 session 指定一个 agent |
 | `--agents <JSON>` | | 通过 JSON 动态定义自定义 subagent |
-| `--teammate-mode <MODE>` | | 设置 agent 团队显示模式：`auto`、`in-process`、`tmux` |
+| `--teammate-mode <MODE>` | | 设置 agent team 显示方式：`auto`、`in-process`、`tmux` |
 
 ---
 
-## MCP 与插件
+## MCP & Plugins
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--mcp-config <PATH\|JSON>` | | 从 JSON 文件或字符串加载 MCP 服务器 |
-| `--strict-mcp-config` | | 仅使用来自 `--mcp-config` 的 MCP 服务器，忽略所有其他配置 |
-| `--plugin-dir <PATH>` | | 从目录加载插件（仅限当前会话，可重复使用） |
+| `--mcp-config <PATH\|JSON>` | | 从 JSON 文件或字符串加载 MCP server |
+| `--strict-mcp-config` | | 仅使用 `--mcp-config` 中的 MCP server，忽略所有其他 |
+| `--plugin-dir <PATH>` | | 从目录加载 plugin 用于当前 session（可重复） |
 
 ---
 
-## 目录与工作区
+## Directory & Workspace
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--add-dir <PATH>` | | 添加额外的供 Claude 访问的工作目录 |
+| `--add-dir <PATH>` | | 添加 Claude 可访问的额外工作目录 |
 | `--worktree` | `-w` | 在隔离的 git worktree 中启动 Claude（从 HEAD 分支） |
 
 ---
 
-## 预算与限制
+## Budget & Limits
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--max-budget-usd <AMOUNT>` | | API 调用在达到指定金额前停止的最大美元预算（仅 print 模式） |
-| `--max-turns <NUMBER>` | | 限制 agentic 轮次数量（仅 print 模式） |
+| `--max-budget-usd <AMOUNT>` | | API 调用在停止前的最大美元金额（仅 print mode） |
+| `--max-turns <NUMBER>` | | 限制 agentic turn 的数量（仅 print mode） |
 
 ---
 
-## 集成
+## Integration
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
 | `--chrome` | | 启用 Chrome 浏览器集成以进行 web 自动化 |
-| `--no-chrome` | | 禁用当前会话的 Chrome 浏览器集成 |
-| `--ide` | | 启动时自动连接到 IDE（如果恰好有一个有效的 IDE 可用） |
+| `--no-chrome` | | 为此 session 禁用 Chrome 浏览器集成 |
+| `--ide` | | 如果恰好有一个有效的 IDE 可用，启动时自动连接到 IDE |
 
 ---
 
-## 初始化与维护
+## Initialization & Maintenance
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--init` | | 运行初始化 hooks 并启动交互模式 |
-| `--init-only` | | 运行初始化 hooks 后退出（不进入交互会话） |
-| `--maintenance` | | 运行维护 hooks 后退出 |
+| `--init` | | 运行初始化 hook 并启动交互模式 |
+| `--init-only` | | 运行初始化 hook 并退出（不启动交互 session） |
+| `--maintenance` | | 运行维护 hook 并退出 |
 
 ---
 
-## 调试与诊断
+## Debug & Diagnostics
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
-| `--debug <CATEGORIES>` | | 启用调试模式，可选的类别过滤（例如 `"api,hooks"`） |
+| `--debug <CATEGORIES>` | | 启用 debug 模式，可选类别过滤（例如 `"api,hooks"`） |
 
 ---
 
-## 设置覆盖
+## Settings Override
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
 | `--settings <PATH\|JSON>` | | 要加载的 settings JSON 文件路径或 JSON 字符串 |
-| `--setting-sources <LIST>` | | 以逗号分隔的要加载的 sources 列表：`user`、`project`、`local` |
-| `--disable-slash-commands` | | 禁用当前会话的所有 skills 和 slash 命令 |
+| `--setting-sources <LIST>` | | 要加载的逗号分隔来源列表：`user`、`project`、`local` |
+| `--disable-slash-commands` | | 为此 session 禁用所有 skill 和 slash command |
 
 ---
 
-## 版本与帮助
+## Version & Help
 
-| 标志 | 缩写 | 描述 |
+| Flag | Short | Description |
 |------|-------|-------------|
 | `--version` | `-v` | 输出版本号 |
 | `--help` | `-h` | 显示帮助信息 |
 
 ---
 
-## 子命令
+## Subcommands
 
-以下是通过 `claude <subcommand>` 运行的顶级命令：
+这些是作为 `claude <subcommand>` 运行的顶级命令：
 
-| 子命令 | 描述 |
+| Subcommand | Description |
 |------------|-------------|
 | `claude` | 启动交互式 REPL |
-| `claude "query"` | 使用初始提示词启动 REPL |
-| `claude agents` | 列出已配置的 agents |
-| `claude auth` | 管理 Claude Code 身份验证 |
+| `claude "query"` | 以初始 prompt 启动 REPL |
+| `claude agents` | 列出已配置的 agent |
+| `claude auth` | 管理 Claude Code 认证 |
 | `claude doctor` | 从命令行运行诊断 |
-| `claude install` | 安装或切换 Claude Code 原生构建版本 |
-| `claude mcp` | 配置 MCP 服务器（`add`、`remove`、`list`、`get`、`enable`） |
-| `claude plugin` | 管理 Claude Code 插件 |
-| `claude remote-control` | 管理远程控制会话 |
-| `claude setup-token` | 创建用于订阅使用的长期令牌 |
+| `claude install` | 安装或切换 Claude Code 原生构建 |
+| `claude mcp` | 配置 MCP server（`add`、`remove`、`list`、`get`、`enable`） |
+| `claude plugin` | 管理 Claude Code plugin |
+| `claude remote-control` | 管理 remote control session |
+| `claude setup-token` | 创建用于订阅使用的长期 token |
 | `claude update` / `claude upgrade` | 更新到最新版本 |
 
 ---
 
-## 环境变量
+## Environment Variables
 
-以下启动时环境变量需在启动 Claude Code 之前在 shell 中设置（它们无法通过 `settings.json` 配置）：
+这些仅限启动时的环境变量在启动 Claude Code 之前在 shell 中设置（它们不能通过 `settings.json` 配置）：
 
-| 变量 | 描述 |
+| Variable | Description |
 |----------|-------------|
-| `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` | 启用实验性 agent 团队功能 |
-| `CLAUDE_CODE_TMPDIR` | 覆盖内部文件的临时目录。也可通过 `env` 键配置——参见[设置参考](./claude-settings.md#environment-variables-via-env) |
-| `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` | 启用额外目录的 CLAUDE.md 加载 |
-| `DISABLE_AUTOUPDATER=1` | 禁用自动更新。也可通过 `env` 键配置——参见[设置参考](./claude-settings.md#environment-variables-via-env) |
-| `CLAUDE_CODE_EFFORT_LEVEL` | 控制思考深度——参见[设置参考](./claude-settings.md#environment-variables-via-env) |
-| `USE_BUILTIN_RIPGREP=0` | 使用系统 ripgrep 而非内置版本（Alpine Linux） |
-| `CLAUDE_CODE_SIMPLE` | 启用简单模式（仅 Bash + Edit tools）。也可通过 `env` 键配置——参见[设置参考](./claude-settings.md#environment-variables-via-env) |
-| `CLAUDE_BASH_NO_LOGIN=1` | 跳过 BashTool 的登录 shell |
-| `CCR_FORCE_BUNDLE=1` | 在使用 `claude --remote` 时强制打包/上传本地仓库。也可通过 `env` 键配置——参见[设置参考](./claude-settings.md#environment-variables-via-env) |
+| `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` | 启用实验性 agent team。也可通过 env 配置——参见 [Settings 参考](./claude-settings-zh.md#environment-variables) |
+| `CLAUDE_CODE_TMPDIR` | 覆盖内部文件的临时目录。也可通过 `env` key 配置——参见 [Settings 参考](./claude-settings-zh.md#environment-variables-via-env) |
+| `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` | 启用额外目录 CLAUDE.md 加载。也可通过 `env` key 配置——参见 [Settings 参考](./claude-settings-zh.md#environment-variables-via-env) |
+| `DISABLE_AUTOUPDATER=1` | 禁用自动更新。也可通过 `env` key 配置——参见 [Settings 参考](./claude-settings-zh.md#environment-variables-via-env) |
+| `CLAUDE_CODE_EFFORT_LEVEL` | 控制 thinking 深度——参见 [Settings 参考](./claude-settings-zh.md#environment-variables-via-env) |
+| `USE_BUILTIN_RIPGREP=0` | 使用系统 ripgrep 代替内置版本（Alpine Linux） |
+| `CLAUDE_CODE_SIMPLE` | 启用 simple mode（仅 Bash + Edit 工具）。也可通过 `env` key 配置——参见 [Settings 参考](./claude-settings-zh.md#environment-variables-via-env) |
+| `CLAUDE_BASH_NO_LOGIN=1` | 跳过 BashTool 的 login shell |
+| `CCR_FORCE_BUNDLE=1` | 使用 `claude --remote` 时强制 bundling/上传本地 repository。也可通过 `env` key 配置——参见 [Settings 参考](./claude-settings-zh.md#environment-variables-via-env) |
 
-有关可通过 `settings.json` 中的 `"env"` 键配置的环境变量（包括 `MAX_THINKING_TOKENS`、`CLAUDE_CODE_SHELL`、`CLAUDE_CODE_ENABLE_TASKS`、`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`、`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` 等），请参阅 [Claude 设置参考](./claude-settings.md#environment-variables-via-env)。
+关于可通过 `settings.json` 中的 `"env"` key 配置的环境变量（包括 `MAX_THINKING_TOKENS`、`CLAUDE_CODE_SHELL`、`CLAUDE_CODE_ENABLE_TASKS`、`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`、`CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS` 等），请参见 [Claude Settings 参考](./claude-settings-zh.md#environment-variables-via-env)。
 
 ---
 
-## 来源
+## Sources
 
-- [Claude Code CLI 参考](https://code.claude.com/docs/en/cli-reference)
-- [Claude Code 无头模式](https://code.claude.com/docs/en/headless)
-- [Claude Code 设置](https://code.claude.com/docs/en/setup)
+- [Claude Code CLI Reference](https://code.claude.com/docs/en/cli-reference)
+- [Claude Code Headless Mode](https://code.claude.com/docs/en/headless)
+- [Claude Code Setup](https://code.claude.com/docs/en/setup)
 - [Claude Code CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md)
-- [Claude Code 常见工作流](https://code.claude.com/docs/en/common-workflows)
+- [Claude Code Common Workflows](https://code.claude.com/docs/en/common-workflows)
