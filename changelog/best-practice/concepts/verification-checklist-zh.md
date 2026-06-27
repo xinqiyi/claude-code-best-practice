@@ -1,69 +1,77 @@
-# Verification Checklist — README CONCEPTS 部分
+# Verification Checklist — README CONCEPTS Section
 
-用于验证 CONCEPTS 表格准确性的规则。每条规则在每次 workflow 运行时都会被检查。
+CONCEPTS 表格准确性的验证规则。每次 workflow 运行期间检查每条规则。
 
 ## 规则
 
-### 1. 外部 URL 可用性
-- **类别**: URL 准确性
-- **检查内容**: CONCEPTS 表格中的每个外部 URL（文档链接）都返回有效页面
-- **检查深度**: 获取每个 URL 并确认其加载了预期页面（而非重定向到错误页面）
-- **对比来源**: `https://code.claude.com/docs/llms.txt` 作为规范 URL 列表
+### 1. External URL Liveness
+- **Category**: URL Accuracy
+- **检查内容**: CONCEPTS 表中的每个外部 URL（docs 链接）返回有效页面
+- **Depth**: 获取每个 URL 并确认加载的是预期页面（而非重定向到错误页面）
+- **对比来源**: `https://code.claude.com/docs/llms.txt` 获取标准 URL 列表
 - **添加日期**: 2026-03-02
-- **起因**: Permissions URL `/iam` 被发现重定向到 Authentication 页面而非 Permissions 页面
+- **来源**: 发现 Permissions URL `/iam` 重定向到 Authentication 页面而非 Permissions
 
-### 2. 锚点片段有效性
-- **类别**: URL 准确性
-- **检查内容**: 任何带有锚点片段（`#section-name`）的 URL 都能匹配目标页面上的实际标题
-- **检查深度**: 获取页面并验证该标题存在且具有预期的锚点
+### 2. Anchor Fragment Validity
+- **Category**: URL Accuracy
+- **检查内容**: 任何带有锚点片段（`#section-name`）的 URL 匹配目标页面上的实际标题
+- **Depth**: 获取页面并验证标题存在且锚点正确
 - **对比来源**: 获取的页面内容
 - **添加日期**: 2026-03-02
-- **起因**: Rules 锚点 `#modular-rules-with-clauderules` 已失效；该部分已重命名为 `#organize-rules-with-clauderules`
+- **来源**: Rules 锚点 `#modular-rules-with-clauderules` 已过期；section 重命名为 `#organize-rules-with-clauderules`
 
-### 3. 缺失的文档页面
-- **类别**: 遗漏的概念
-- **检查内容**: 官方文档索引（`llms.txt`）中每个代表面向用户功能的页面，在 CONCEPTS 表格中都有对应的行
-- **检查深度**: 将完整文档索引与 CONCEPTS 表格条目进行对比
+### 3. Missing Docs Pages
+- **Category**: Missing Concepts
+- **检查内容**: 官方文档索引（`llms.txt`）中每个代表面向用户功能的页面在 CONCEPTS 表中都有对应行
+- **Depth**: 对照 CONCEPTS 表条目比较完整文档索引
 - **对比来源**: `https://code.claude.com/docs/llms.txt`
 - **添加日期**: 2026-03-02
-- **起因**: 发现多个遗漏的概念（Agent Teams、Keybindings、Model Configuration 等）
+- **来源**: 发现多个缺失的概念（Agent Teams、Keybindings、Model Configuration 等）
 
-### 4. 本地徽章链接有效性
-- **类别**: 徽章准确性
-- **检查内容**: CONCEPTS 表格中的每个徽章目标路径（`best-practice/*.md`、`implementation/*.md`、`.claude/*/`）都指向一个存在的文件或目录
-- **检查深度**: 使用 Read/Glob 验证文件是否存在
+### 4. Local Badge Link Validity
+- **Category**: Badge Accuracy
+- **检查内容**: CONCEPTS 表中的每个 badge 目标路径（`best-practice/*.md`、`implementation/*.md`、`.claude/*/`）指向存在的文件或目录
+- **Depth**: 使用 Read/Glob 验证文件存在
 - **对比来源**: 本地文件系统
 - **添加日期**: 2026-03-02
-- **起因**: 初始检查清单创建
+- **来源**: 初始 checklist 创建
 
-### 5. 描述时效性
-- **类别**: 描述准确性
-- **检查内容**: 每个概念的描述准确反映当前官方文档的描述
-- **检查深度**: 将 README 描述与官方页面的 meta description 或第一段进行对比
+### 5. Description Currency
+- **Category**: Description Accuracy
+- **检查内容**: 每个概念的描述准确反映当前官方文档描述
+- **Depth**: 将 README 描述与官方页面的 meta description 或第一段进行比较
 - **对比来源**: 官方文档页面内容
 - **添加日期**: 2026-03-02
-- **起因**: Memory 描述缺少 auto memory；MCP Servers 位置缺少 `.mcp.json`
+- **来源**: Memory 描述缺少 auto memory；MCP Servers location 缺少 `.mcp.json`
 
-### 6. TIPS 部分 URL 一致性
-- **类别**: URL 准确性
-- **检查内容**: 当 CONCEPTS 或 Hot 表格中的 URL 被更新时，同时检查 TIPS 部分是否存在相同的过时 URL
-- **检查深度**: 搜索 TIPS 部分（第 125–267 行），查找所有在 CONCEPTS/Hot 表格中被标记的 URL
-- **对比来源**: llms.txt sitemap + CONCEPTS 表格 URL
+### 6. TIPS Section URL Consistency
+- **Category**: URL Accuracy
+- **检查内容**: 当 CONCEPTS 或 Hot 表中的 URL 更新时，同时检查 TIPS section 中是否存在相同的过期 URL
+- **Depth**: 在 TIPS section 中搜索 CONCEPTS/Hot 表中被标记的每个 URL
+- **对比来源**: llms.txt sitemap + CONCEPTS 表 URLs
 - **添加日期**: 2026-04-16
-- **起因**: `web-scheduled-tasks` URL 已在 Hot 表格中修复（2026-04-14），但相同的过时 URL 仍存在于 TIPS 部分（第 223 行）
+- **来源**: Hot 表中修复了 `web-scheduled-tasks` URL（2026-04-14）但 TIPS 中相同的过期 URL 依然存在
 
-### 7. Beta 徽章时效性
-- **类别**: 徽章准确性
-- **检查内容**: Hot 表格中标记为 `![beta](!/tags/beta.svg)` 的概念，在其官方文档页面中仍应被标记为 beta / research preview（标题横幅、"research preview" 字样或环境变量门控）
-- **检查深度**: 获取每个上游页面并检查是否有明确的 beta/preview/experimental 措辞；如果没有，则 README 徽章可能已过时
-- **对比来源**: 官方文档页面的横幅文本 + GA 标记字样
+### 7. Beta Badge Currency
+- **Category**: Badge Accuracy
+- **检查内容**: Hot 表中标记为 `![beta](!/tags/beta.svg)` 的概念在其官方文档页面中仍应被标记为 beta / research preview
+- **Depth**: 获取每个上游页面并检查明确的 beta/preview/experimental 措辞
+- **对比来源**: 官方文档页面 banner 文本 + GA 标记
 - **添加日期**: 2026-04-26
-- **起因**: Workflow-concepts-agent 标记出 Routines、No Flicker Mode、Computer Use 和 Code Review 在 README 中带有 beta 徽章，而其文档页面已显示为 GA（置信度 0.6）——这种漂移类型未被现有的描述时效性规则覆盖
+- **来源**: workflow-concepts-agent 标记 Routines、No Flicker Mode、Computer Use 和 Code Review 带有 README beta badges，但其文档页面读起来像 GA
 
-### 8. Location 列事实准确性
-- **类别**: 描述准确性
-- **检查内容**: 每个概念的 **Location** 列（第 2 列）值必须在事实上与官方文档中描述的机制相匹配——不仅仅是路径/命令/标志存在，还要确保其特征描述正确（例如，某个功能如何存储状态、它跟踪什么、配置存放在哪里）
-- **检查深度**: 对于任何做出机制性声明的 Location 值（例如 "git-based"、"automatic"、"built-in (env var)"、"cloud backend"），获取官方页面并确认该声明与文档自身对机制的描述一致
-- **对比来源**: 官方文档页面正文（机制/"how it works" 部分）
+### 8. Location Column Factual Accuracy
+- **Category**: Description Accuracy
+- **检查内容**: 每个概念的 Location 列值必须事实性地匹配官方文档中描述的机制
+- **Depth**: 对于任何做出机制声明的 Location 值，获取官方页面并确认声明与文档自身的描述一致
+- **对比来源**: 官方文档页面正文
 - **添加日期**: 2026-05-21
-- **起因**: Checkpointing 的 Location 在之前的每次运行中都显示为 `automatic (git-based)`，但 `/en/checkpointing` 明确说明 checkpoints 跟踪的是文件编辑工具（file-editing-tool）的变更（而非 git，也非 bash），并且"不能替代版本控制"——*"checkpoints 作为'本地撤销'，Git 作为'永久历史'。"* 现有规则 #5（描述时效性）仅检查 Description 列，因此 Location 列中的事实错误长期未被发现
+- **来源**: Checkpointing Location 之前每次运行都读作 `automatic (git-based)`，但官方文档明确说明 checkpoints 追踪文件编辑工具的变化
+
+### 9. Bundled Skill / Command Rename Tracking
+- **Category**: Description Accuracy（Location column）
+- **检查内容**: CONCEPTS/Hot 的 Location 列中命名的任何 slash command 或 bundled skill 仍以该确切名称存在
+- **Depth**: 扫描 CHANGELOG 中"重命名"、"移除"或"弃用"的 command/skill 事件
+- **对比来源**: GitHub CHANGELOG + 官方 commands/skills 参考页面
+- **添加日期**: 2026-05-25
+- **来源**: `/simplify` 在 v2.1.147 中被重命名为 `/code-review`
