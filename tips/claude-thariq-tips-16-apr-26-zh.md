@@ -1,177 +1,177 @@
-# 使用 Claude Code：会话管理与 100 万上下文 — Thariq
+# 使用 Claude Code：Session Management 与 1M Context — Thariq
 
-一份关于在 Claude Code 中管理会话、上下文窗口和压缩的指南，由 Thariq ([@trq212](https://x.com/trq212)) 于 2026 年 4 月 16 日分享。
+Thariq（[@trq212](https://x.com/trq212)）于 2026 年 4 月 16 日分享的关于管理 sessions、context windows 和 compaction 的指南。
 
 <table width="100%">
 <tr>
-<td><a href="../">← 返回 Claude Code 最佳实践</a></td>
+<td><a href="../">← Back to Claude Code Best Practice</a></td>
 <td align="right"><img src="../!/claude-jumping.svg" alt="Claude" width="60" /></td>
 </tr>
 </table>
 
 ---
 
-## 背景
+## Context
 
-凭借 100 万 token 的上下文窗口，Claude Code 能够更可靠地处理更长的任务——但如果你不刻意管理会话，它也打开了上下文污染的大门。会话管理比以往任何时候都更重要：何时开始新会话，何时压缩，何时回退，何时委托给 subagent。
+借助 1M token context window，Claude Code 可以更可靠地处理更长的任务 — 但如果你不刻意管理 sessions，它也打开了 context pollution 的大门。Session management 比以往任何时候都重要：何时重新开始、何时 compact、何时 rewind 以及何时委托给 subagents。
 
-<img src="assets/thariq-26-4-16/1.png" alt="Thariq 介绍推文" width="50%" />
+<img src="assets/thariq-26-4-16/1.png" alt="Thariq intro tweet" width="50%" />
 
-<img src="assets/thariq-26-4-16/2.png" alt="会话管理介绍" width="50%" />
-
----
-
-## 上下文、压缩与上下文腐烂快速入门
-
-上下文窗口是模型在生成下一个响应时能够一次性"看到"的全部内容。它包括你的 system prompt、到目前为止的对话、每次 tool 调用及其输出，以及每个已读取的文件。Claude Code 拥有 **一百万个 token** 的上下文窗口。
-
-不幸的是，使用上下文会带来一点代价——**上下文腐烂**。随着上下文的增长，模型性能会下降，因为注意力需要分散到更多的 token 上，而较旧的、不相关的内容开始干扰当前任务。对于 100 万上下文的模型，上下文腐烂大约在 **~300-400k token** 时开始产生一定影响，但这高度依赖于任务——并非一个固定规则。
-
-上下文窗口是一个硬性截止点。当你接近结束时，需要总结任务并在一个新的上下文窗口中继续——这就是**压缩**。你也可以手动触发压缩。
-
-<img src="assets/thariq-26-4-16/3.png" alt="上下文窗口示意图" width="50%" />
-
-<img src="assets/thariq-26-4-16/4.png" alt="上下文腐烂解释" width="50%" />
+<img src="assets/thariq-26-4-16/2.png" alt="Session management intro" width="50%" />
 
 ---
 
-## 每一次交互都是一个分支点
+## Context、Compaction 与 Context Rot 快速入门
 
-在 Claude 完成一次交互后，你有多种选择来决定下一步做什么：
+Context window 是 model 在生成其下一个响应时一次性"看到"的一切。它包括你的 system prompt、到目前为止的对话、每个 tool call 及其输出，以及每个被读取的文件。Claude Code 有 **一百万个 tokens** 的 context window。
 
-- **继续** — 在同一会话中发送另一条消息
-- **/rewind (esc esc)** — 跳回之前的某条消息并从那里重新尝试
-- **/clear** — 开始一个新会话，通常附带你从刚刚学到的东西中提炼出的 brief
-- **Compact** — 总结到目前为止的会话，并在该总结的基础上继续
-- **Subagents** — 将下一块工作委托给一个拥有自己干净上下文的 agent，只将其结果拉回
+不幸的是，使用 context 有一个轻微的代价 — **context rot**。Model 性能随着 context 增长而下降，因为 attention 分散到更多的 tokens 上，而较旧的、不相关的内容开始分散当前任务的注意力。对于 1M context model，某种程度的 context rot 发生在大约 **~300-400k tokens** 时，但这高度依赖于任务 — 不是一个硬性规则。
 
-虽然最自然的选择就是继续，但其他四个选项的存在是为了帮助你管理上下文。
+Context windows 是硬性截止。当你接近末尾时，你需要总结任务并在新的 context window 中继续 — 这就是 **compaction**。你也可以自己触发 compaction。
 
-<img src="assets/thariq-26-4-16/5.png" alt="压缩与分支示意图" width="50%" />
+<img src="assets/thariq-26-4-16/3.png" alt="Context window diagram" width="50%" />
 
-<img src="assets/thariq-26-4-16/6.png" alt="交互后的五种选择" width="50%" />
+<img src="assets/thariq-26-4-16/4.png" alt="Context rot explanation" width="50%" />
 
-每个选项会携带不同程度的现有上下文：
+---
 
-| 新会话 | Compact | Subagent | Rewind | Continue |
+## 每个 Turn 都是一个 Branching Point
+
+Claude 完成一个 turn 后，你对于下一步有出人意料多的选择：
+
+- **Continue** — 在同一 session 中发送另一条消息
+- **/rewind (esc esc)** — 跳回到之前的消息并从那里重试
+- **/clear** — 开始一个新 session，通常附带你从刚才学到的内容中提炼的 brief
+- **Compact** — 总结到目前为止的 session 并在总结的基础上继续
+- **Subagents** — 将下一块工作委托给一个拥有自己干净 context 的 agent，只将其结果拉回
+
+虽然最自然的是继续，但其他四个选项的存在是为了帮助你管理 context。
+
+<img src="assets/thariq-26-4-16/5.png" alt="Compaction and branching diagram" width="50%" />
+
+<img src="assets/thariq-26-4-16/6.png" alt="Five options after a turn" width="50%" />
+
+每个选项携带不同数量的现有 context：
+
+| Fresh session | Compact | Subagent | Rewind | Continue |
 |:---:|:---:|:---:|:---:|:---:|
-| 仅你的 brief | 有损总结 | 全部 + 结果 | 保留前缀，截断尾部 | 全部保留 |
-| *无任何内容* | | | | *全部内容* |
+| your brief only | lossy summary | all + result | prefix kept, tail cut | everything stays |
+| *none of it* | | | | *all of it* |
 
-<img src="assets/thariq-26-4-16/7.png" alt="上下文传递频谱" width="50%" />
-
----
-
-## 何时开始新会话
-
-新的 100 万上下文窗口意味着你现在可以更可靠地执行更长的任务——例如，从头构建一个全栈应用。但仅仅因为你的模型没有耗尽上下文，并不意味着你不应该开始一个新会话。
-
-**一般经验法则：当你开始一个新任务时，也应该开始一个新会话。**
-
-一个灰色地带是，当你可能需要执行一些相关任务时，其中部分上下文仍然是必要的，但并非全部。例如，为你刚刚实现的功能编写文档。虽然你可以开始一个新会话，但 Claude 需要重新读取文件，这样会更慢且更昂贵。由于文档可能不是一个高度依赖智能的任务，额外上下文带来的效率提升可能是值得的。
-
-<img src="assets/thariq-26-4-16/8.png" alt="何时开始新会话" width="50%" />
+<img src="assets/thariq-26-4-16/7.png" alt="Context carry-forward spectrum" width="50%" />
 
 ---
 
-## 回退而非纠正
+## 何时开始 New Session
 
-如果让 Thariq 选一个能体现良好上下文管理的习惯，那就是**回退**。
+新的 1M context windows 意味着你现在可以更可靠地完成更长的任务 — 例如从头构建一个 full-stack app。但仅仅因为你的 model 没有耗尽 context，并不意味着你不应该开始一个新的 session。
 
-在 Claude Code 中，双击 Esc（或运行 `/rewind`）可以让你跳回之前的任意一条消息并重新输入提示。该点之后的消息将从上下文中移除。
+**一般经验法则：当你开始一个新任务时，你也应该开始一个新 session。**
 
-**纠正**（在失败的尝试 A 之后说"不，尝试 B"）会让失败的尝试留在上下文中：
-> 上下文 = 读取 + 2 次失败尝试 + 2 次纠正 + 修复方案
+一个灰色地带是当你想做相关任务，其中一些 context 仍然是必要的但并非全部时。例如，为你刚刚实现的一个 feature 做文档。虽然你可以开始一个新 session，但 Claude 将不得不重新读取文件，这会变慢且更贵。由于文档可能不是一个对智能高度敏感的任务，额外的 context 可能值得效率的提升。
 
-**回退**（回到失败尝试之前，用你学到的东西重新提示）更加干净：
-> 上下文 = 读取 + 一次有依据的提示 + 修复方案
-
-回退通常是更好的方法。例如，Claude 读取了五个文件，尝试了一种方法，但没有成功。你的本能可能是输入"这没成功，试试 X。"但更好的做法是回退到文件读取之后，用你学到的东西重新提示："不要使用方法 A，foo 模块没有暴露那个功能——直接使用 B。"
-
-你也可以使用 **"summarize from here"** 让 Claude 总结其学到的东西并创建一条交接消息，就像是从未来的 Claude（尝试过但失败了）向之前的 Claude 发送一条消息。
-
-<img src="assets/thariq-26-4-16/9.png" alt="纠正与回退示意图" width="50%" />
-
-<img src="assets/thariq-26-4-16/10.png" alt="带有 summarize from here 的回退" width="50%" />
+<img src="assets/thariq-26-4-16/8.png" alt="When to start a new session" width="50%" />
 
 ---
 
-## 压缩 vs. 新会话
+## Rewinding 而非 Correcting
 
-一旦会话变得冗长，你有两种方式来减轻负担：`/compact` 或 `/clear`（然后重新开始）。它们感觉相似但行为截然不同。
+如果 Thariq 必须选出一个代表良好 context management 的习惯，那就是 **rewind**。
 
-**Compact** 要求模型总结到目前为止的对话，然后用该总结替换历史记录。它是有损的——你相信 Claude 能判断什么重要，但你不需要自己写任何东西。Claude 在包含重要学习内容或文件方面可能更加全面。你也可以通过传递指令来引导它（`/compact focus on the auth refactor, drop the test debugging`）。
+在 Claude Code 中，双击 Esc（或运行 `/rewind`）让你跳回到任何之前的消息并从那里重新 prompt。该点之后的消息将从 context 中丢弃。
 
-- **任务进行中**，保持 momentum——细节可以模糊
-- 成本低，继续前进
+**Correcting**（在失败的尝试 A 后说 "no, try B"）将失败的尝试留在 context 中：
+> context = reads + 2 failed attempts + 2 corrections + the fix
 
-**新会话 + brief**（`/clear`）意味着*你*自己写下重要的内容（"我们在重构 auth middleware，约束条件是 X，关键文件是 A 和 B，我们已经排除了方法 Y"）然后重新开始。这需要更多工作，但最终的内容是*你*认为相关的。
+**Rewinding**（回到失败尝试之前，用你学到的重新 prompt）更干净：
+> context = reads + one informed prompt + the fix
 
-- **高风险的**下一步——在 10 万条探索信息中找到了一条关键信息
+Rewind 通常是更好的方法。例如，Claude 读取了五个文件，尝试了一种方法，结果不成功。你的本能可能是输入 "that didn't work, try X instead." 但更好的做法是 rewind 到文件读取之后，用你学到的重新 prompt："Don't use approach A, the foo module doesn't expose that — go straight to B."
+
+你还可以使用 **"summarize from here"** 让 Claude 总结其学习并提供交接消息，有点像来自未来自己的消息，告诉之前的 Claude 迭代 "我尝试了，但不行"。
+
+<img src="assets/thariq-26-4-16/9.png" alt="Correcting vs rewinding diagram" width="50%" />
+
+<img src="assets/thariq-26-4-16/10.png" alt="Rewind with summarize from here" width="50%" />
+
+---
+
+## Compacting 与 Fresh Sessions
+
+一旦 session 变长，你有两种方式减负：`/compact` 或 `/clear`（然后重新开始）。它们感觉相似但行为非常不同。
+
+**Compact** 要求 model 总结到目前为止的对话，然后用该总结替换历史。这是有损的 — 你信任 Claude 来决定什么是重要的，但你自己不需要写任何东西。Claude 在包含重要学习或文件方面可能更彻底。你也可以通过传递指令来引导它（`/compact focus on the auth refactor, drop the test debugging`）。
+
+- **任务进行中**，保持动量 — 细节可能模糊
+- 便宜，继续前进
+
+**Fresh + brief**（`/clear`）意味着*你*写下重要的内容（"we're refactoring the auth middleware, the constraint is X, the files that matter are A and B, we've ruled out approach Y"）并全新开始。工作量更大，但产生的 context 是*你*决定相关的。
+
+- **高风险的**下一步 — 在 100K 的探索中发现了一个事实
 - 更多工作，更精确
 
-<img src="assets/thariq-26-4-16/11.png" alt="压缩与新会话对比" width="50%" />
+<img src="assets/thariq-26-4-16/11.png" alt="Compacting vs fresh sessions" width="50%" />
 
-<img src="assets/thariq-26-4-16/12.png" alt="压缩与新会话示意图" width="50%" />
-
----
-
-## 什么导致压缩效果差？
-
-如果你运行过很多长会话，你可能注意到有时压缩效果特别差。当模型无法预测你工作的方向时，压缩效果可能会很差。
-
-例如，自动压缩在长时间的调试会话后触发，并总结整个调查过程。你的下一条消息是"现在修复我们在 bar.ts 中看到的那个警告。"但由于会话一直专注于调试，那个其他警告可能已经被从总结中删除了。
-
-这个问题尤其棘手，因为由于上下文腐烂，模型在进行压缩时正处于其最不智能的状态。拥有一百万上下文，你有更多时间主动使用 `/compact` 并附上你想做什么的描述。
-
-<img src="assets/thariq-26-4-16/13.png" alt="压缩效果差示意图" width="50%" />
-
-<img src="assets/thariq-26-4-16/14.png" alt="压缩效果差解释" width="50%" />
+<img src="assets/thariq-26-4-16/12.png" alt="Compact vs fresh diagram" width="50%" />
 
 ---
 
-## Subagents 与全新上下文窗口
+## 什么导致 Bad Compact？
 
-Subagents 是上下文管理的一种形式，当你预先知道某块工作会产生大量你不再需要的中间输出时非常有用。
+如果你运行很多长时间运行的 sessions，你可能注意到某些时候 compacting 可能特别糟糕。Bad compacts 发生在 model 无法预测你工作方向的时候。
 
-当 Claude 通过 Agent tool 创建一个 subagent 时，该 subagent 会获得自己全新的上下文窗口。它可以根据需要做尽可能多的工作，然后综合其结果，只有最终报告返回给父会话。
+例如，autocompact 在长时间 debugging session 后触发并总结了调查。你的下一条消息是 "now fix that other warning we saw in bar.ts." 但由于 session 专注于 debugging，另一个 warning 可能已从总结中丢弃。
 
-判断标准：**我是否还需要这个 tool 的输出，还是只需要结论？**
+这特别困难，因为由于 context rot，model 在 compacting 时处于最不智能的状态。拥有一百万 context，你有更多时间用你想做的事情的描述来主动 `/compact`。
 
-当 subagent 退出时，探索噪音被垃圾回收——20 次文件读取、12 次 grep、3 条死路——只有最终报告返回给父上下文。
+<img src="assets/thariq-26-4-16/13.png" alt="Bad compact diagram" width="50%" />
 
-虽然 Claude Code 会自动调用 subagents，但你可能希望明确告诉它这样做。例如：
-
-- "创建一个 subagent，根据以下 spec 文件验证这项工作的结果"
-- "分出一个 subagent 阅读另一个代码库，总结它是如何实现 auth 流程的，然后你以同样的方式自行实现"
-- "分出一个 subagent，根据我的 git 更改来编写这个功能的文档"
-
-<img src="assets/thariq-26-4-16/15.png" alt="Subagent 上下文示意图" width="50%" />
-
-<img src="assets/thariq-26-4-16/16.png" alt="Subagent 解释" width="50%" />
-
-<img src="assets/thariq-26-4-16/17.png" alt="何时使用 subagents" width="50%" />
+<img src="assets/thariq-26-4-16/14.png" alt="Bad compact explanation" width="50%" />
 
 ---
 
-## 总结
+## Subagents 与 Fresh Context Windows
 
-当 Claude 完成一次交互而你将发送新消息时，你面临一个决策点。随着时间的推移，Claude 会自动处理这个问题，但目前这是你可以引导 Claude 输出的方式之一。
+Subagents 是 context management 的一种形式，适用于你提前知道某块工作会产生大量你以后不需要的中间输出的情况。
 
-| 情况 | 选择 | 原因 |
+当 Claude 通过 Agent tool spawn 一个 subagent 时，该 subagent 获得自己的 fresh context window。它可以做尽可能多的工作，然后合成其结果，只将最终报告返回给父级。
+
+心理测试：**我以后会需要这个 tool output 还是只需要结论？**
+
+探索噪音在 subagent 退出时被垃圾回收 — 20 个文件读取、12 个 greps、3 个死胡同 — 只有最终报告返回到父级 context。
+
+虽然 Claude Code 会自动调用 subagents，你可能想告诉它明确这样做。例如：
+
+- "Spin up a subagent to verify the result of this work based on the following spec file"
+- "Spin off a subagent to read through this other codebase and summarize how it implemented the auth flow, then implement it yourself in the same way"
+- "Spin off a subagent to write the docs on this feature based on my git changes"
+
+<img src="assets/thariq-26-4-16/15.png" alt="Subagent context diagram" width="50%" />
+
+<img src="assets/thariq-26-4-16/16.png" alt="Subagent explanation" width="50%" />
+
+<img src="assets/thariq-26-4-16/17.png" alt="When to use subagents" width="50%" />
+
+---
+
+## Summary
+
+当 Claude 结束一个 turn 且你即将发送新消息时，你有一个决策点。随着时间的推移，Claude 会自己处理这个问题，但目前这是你引导 Claude 输出的方式之一。
+
+| Situation | Reach for | Why |
 |-----------|-----------|-----|
-| 同一任务，上下文仍然相关 | **Continue** | 窗口中的所有内容仍然有用——不要为重建它付出代价 |
-| Claude 走错了方向 | **Rewind**（双击 Esc） | 保留有用的文件读取，丢弃失败的尝试，用你学到的东西重新提示 |
-| 任务进行中但会话充满了过时的调试/探索内容 | **/compact \<hint\>** | 成本低；Claude 决定什么重要。必要时通过 hint 引导它 |
-| 开始一个真正的新任务 | **/clear** | 零腐烂；你精确控制哪些内容传递下去 |
-| 下一步会产生大量你只需要结论的输出 | **Subagent** | 中间的 tool 噪音留在子会话的上下文中；只有结果返回 |
+| Same task, context is still relevant | **Continue** | 窗口中的所有内容仍然有效 — 不值得花成本重建 |
+| Claude went down a wrong path | **Rewind** (double-Esc) | 保留有用的文件读取，丢弃失败的尝试，用你学到的重新 prompt |
+| Mid-task but session is bloated with stale debugging/exploration | **/compact \<hint\>** | 低努力；Claude 决定什么重要。需要时用提示引导它 |
+| Starting a genuinely new task | **/clear** | 零 rot；你完全控制什么被携带前进 |
+| Next step will generate lots of output you'll only need the conclusion from | **Subagent** | 中间工具噪音停留在子 context 中；只有结果返回 |
 
-<img src="assets/thariq-26-4-16/18.png" alt="总结" width="50%" />
+<img src="assets/thariq-26-4-16/18.png" alt="Summary" width="50%" />
 
-<img src="assets/thariq-26-4-16/19.png" alt="决策表" width="50%" />
+<img src="assets/thariq-26-4-16/19.png" alt="Decision table" width="50%" />
 
 ---
 
-## 来源
+## Sources
 
-- [Thariq (@trq212) on X — 2026 年 4 月 16 日](https://x.com/trq212)
+- [Thariq (@trq212) on X — April 16, 2026](https://x.com/trq212)
